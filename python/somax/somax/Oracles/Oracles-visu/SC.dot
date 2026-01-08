@@ -1,0 +1,16 @@
+﻿ digraph SC
+{
+  graph [rankdir=LR];
+  node [shape=circle];
+  nodesep = 0.2;
+  forcelabels = true;
+  {
+     0 [id = -1, xlabel = -1]
+   }
+{
+    1 [id = 23, xlabel = 0]
+
+    1 -> 0 [label = 0,constraint = false, style = dotted]
+}  
+
+}
