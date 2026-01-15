@@ -54,7 +54,7 @@ class Player(Parametric, ContentAware):
 
         self.vmo_player: VMO_Player = None
         self.vmo_player_enabled: bool =ParamWithSetter(False, 0, 1, bool, 'vmo_player_enabled', self.enable_vmo_player)
-        self.memory_vmo: bool =ParamWithSetter(False, 0, 1, bool, 'memory_vmo', self.enable_memory_vmo)
+        self.memory_vmo_enabled: bool =ParamWithSetter(False, 0, 1, bool, 'memory_vmo_enabled', self.enable_memory_vmo)
 
 
         self.atoms: Dict[str, Atom] = {}
@@ -110,18 +110,17 @@ class Player(Parametric, ContentAware):
             event_and_transform = self._force_jump()
             output_from_match: bool = True
         else:
-            if self.vmo_player_enabled.value and self.vmo_player is not None and self.memory_vmo.value:
-                pass
-
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
+            #print("Peaks", peaks)
+            #print("transfom_hash", peaks.transform_ids)
             taboo_mask: TabooMask = TabooMask(self.corpus)
             peaks, taboo_mask = self._scale_peaks(peaks, scheduler_time, beat_phase,
-                                                  self.corpus, taboo_mask, enforce_output)
+                                                    self.corpus, taboo_mask, enforce_output)
 
-
-
-            if self.vmo_player_enabled.value and self.vmo_player is not None:
+            # Ajout Vmo
+            print("memory_vmo", self.memory_vmo_enabled.value)
+            if self.vmo_player_enabled.value and self.vmo_player is not None and not self.memory_vmo_enabled.value:
                 event, transform, is_vmo_match = self.vmo_player.new_event()
                 event_and_transform = event, transform
             else:
@@ -139,7 +138,7 @@ class Player(Parametric, ContentAware):
                 output_from_match = True
 
             # Ajout Vmo
-            if self.vmo_player_enabled.value and self.vmo_player is not None:
+            if self.vmo_player_enabled.value and self.vmo_player is not None and  not self.memory_vmo_enabled.value:
                 output_from_match = is_vmo_match
 
             self.previous_peaks = peaks
@@ -221,7 +220,10 @@ class Player(Parametric, ContentAware):
         if not path:
             raise KeyError("an atom must be specified")
 
+
+
         atom: Atom = self._get_atom(path)
+        #print("atom found for influence:",atom.name)
         num_generated_peaks: Dict[Atom, int] = {}
         num_peaks: int = atom.influence(influence, time, **kwargs)
         num_generated_peaks[atom] = num_peaks
@@ -234,6 +236,7 @@ class Player(Parametric, ContentAware):
 
     def _update_peaks_on_new_event(self, time: float) -> None:
         for atom in self.atoms.values():
+            #print("updating peaks for atom:",atom.name)
             atom.update_peaks_on_new_event(time)
 
     def _merged_peaks(self, time: float, corpus: Corpus, **kwargs) -> Peaks:
@@ -245,9 +248,27 @@ class Player(Parametric, ContentAware):
             weight_sum = 1.0
 
         peaks_list: List[Peaks] = []
+
+
+    
         for atom in self.atoms.values():
+            #print("merging peaks for atom:",atom.name)
             if atom.is_enabled_and_eligible():
-                peaks: Peaks = atom.pop_peaks()
+                # Ajout Vmo
+                if  self.vmo_player is not None and self.memory_vmo_enabled.value:
+                    if atom.name in ["self", "selfharmonic","selfmfcc"]:
+                        print("getting peaks from vmo for atom:",atom.name)
+                        peaks: Peaks = self.vmo_player.get_peaks(atom_name=atom.name)
+                        print("number of peaks from vmo:",peaks.size())
+                        print("peak scores:",peaks.scores)
+                    else:
+                        peaks: Peaks = atom.pop_peaks()
+                        print("getting peaks normally from atom:",atom.name)
+                        print("number of peaks from atom:",peaks.size())
+                        print("peak scores:",peaks.scores)
+                else:
+                    peaks: Peaks = atom.pop_peaks()
+
                 peaks.scale(atom.weight / weight_sum)
                 peaks_list.append(peaks)
 
@@ -507,10 +528,11 @@ class Player(Parametric, ContentAware):
     def enable_vmo_player(self, state):
         print(f"enable_vmo_state: {state}")
         self.vmo_player_enabled.value = bool(state)
-    
+
+
     def enable_memory_vmo(self, state):
         print(f"enable_memory_vmo_state: {state}")
-        self.memory_vmo.value = bool(state)
+        self.memory_vmo_enabled.value = bool(state)
 
     def visualisation_PNG_v2(self, list_feature, lrs_threshold:list[int]):
         self.vmo_player.visualisation_PNG(list_feature, lrs_threshold)
