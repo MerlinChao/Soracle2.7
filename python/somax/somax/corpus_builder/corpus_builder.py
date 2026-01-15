@@ -30,6 +30,9 @@ from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
 
+# experimental features
+from somax.features.speed_features import TempogramCoeffOnset, TempogramCoeffMean
+from somax.features.latent_features import LatentSpaceEncoder
 class AudioSegmentation(Enum):
     ONSET = "onset"
     INTERVAL = "interval"
@@ -308,11 +311,25 @@ class CorpusBuilder:
 
         used_features: List[Type[AnalyzableFeature]] = []
         for feature in AnalyzableFeature.classes():  # type: Type[AnalyzableFeature]
+            print("feature",feature)
             try:
+                print("analyzing feature",feature)
                 feature.analyze(events, metadata)
                 used_features.append(feature)
             except FeatureError as e:
                 self.logger.debug(repr(e))
+
+        experimental_features = [TempogramCoeffOnset, TempogramCoeffMean, LatentSpaceEncoder]
+        for feature in experimental_features:
+            try:
+                print("analyzing experimental feature",feature)
+                feature.analyze(events, metadata)
+                print("done", feature)
+                used_features.append(feature)
+            except FeatureError as e:
+                self.logger.debug(repr(e))
+
+        print("used features",used_features)
 
         self.logger.debug(f"[_build_audio]: ({timer() - start_time:.2f}) completed feature analysis "
                           f"for {len(used_features)} features ({', '.join([f.__name__ for f in used_features])})")

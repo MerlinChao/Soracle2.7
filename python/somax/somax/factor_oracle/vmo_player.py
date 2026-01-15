@@ -112,6 +112,9 @@ class VMO_Player(Parametric):
         self.is_matched = False
         self.current_event = None
 
+        self.last_onset_time = 0.0
+        self.current_delta_time = 0.0
+
         self.set_corpus(corpus) # maybe this should n't be here but otherwise the Vmos are not created correctly
 
 
@@ -185,11 +188,21 @@ class VMO_Player(Parametric):
 
 
     def influence(self, influence: FeatureInfluence,time, *args, **kwargs):
+        print("all args in influence vmo player",time, args,kwargs)
         self.influence_handler.influence(influence)
+        self.get_delta_time(time)
         #self.influence_fo.influence(influence, time, self.current_event)
         if self.navigator.need_to_change_next_jump(influence):
             self.next_jump = self.get_next_jump()
             #self.update_when_need_new_jump()
+
+    def get_delta_time(self, time):
+        current_delta_time = time - self.last_onset_time
+        self.last_onset_time = time
+        self.current_delta_time = current_delta_time
+        return current_delta_time
+        
+
 
     def update_region_mask(self, region_mask: RegionMask):
         self.navigator.region_mask = region_mask

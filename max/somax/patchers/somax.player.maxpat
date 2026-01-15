@@ -9,11 +9,21 @@
             "modernui": 1
         },
         "classnamespace": "box",
-        "rect": [ 45.0, 95.0, 1353.0, 763.0 ],
+        "rect": [ 909.0, 223.0, 954.0, 763.0 ],
         "openinpresentation": 1,
         "toolbarvisible": 0,
         "integercoordinates": 1,
         "boxes": [
+            {
+                "box": {
+                    "id": "obj-948",
+                    "maxclass": "newobj",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "patching_rect": [ 859.0, 500.0, 151.0, 22.0 ],
+                    "text": "print tessst_player_soracle"
+                }
+            },
             {
                 "box": {
                     "id": "obj-908",
@@ -16976,7 +16986,7 @@
                                     "midpoints": [ 230.94444401337137, 616.8333298116922, 158.99999956892702, 616.8333298116922 ],
                                     "source": [ "obj-36", 0 ],
                                     "watchpoint_flags": 5,
-                                    "watchpoint_id": 1
+                                    "watchpoint_id": 8
                                 }
                             },
                             {
@@ -20873,7 +20883,7 @@
                 "box": {
                     "comment": "(any) dumpout",
                     "id": "obj-844",
-                    "index": 0,
+                    "index": 4,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -31695,7 +31705,7 @@
                 "box": {
                     "comment": "(int) status",
                     "id": "obj-437",
-                    "index": 0,
+                    "index": 2,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -33563,7 +33573,7 @@
                         "continuity": [ 1.5 ],
                         "cut": [ 1 ],
                         "cut[1]": [ 0 ],
-                        "cut[2]": [ 1 ],
+                        "cut[2]": [ 0 ],
                         "cut[3]": [ 0 ],
                         "cut[4]": [ 0 ],
                         "decaybasis": [ 1 ],
@@ -33605,18 +33615,18 @@
                         "selfmod12": [ 0 ],
                         "selfngramorder": [ 2 ],
                         "selfpeakdecay": [ 2.001 ],
-                        "soracle_continuity": [ 2 ],
-                        "soracle_external_lrs_1": [ 1 ],
-                        "soracle_external_lrs_2": [ 1 ],
-                        "soracle_external_weights": [ 1.0, 0.5, 0.25 ],
-                        "soracle_internal_lrs_1": [ 1 ],
-                        "soracle_internal_lrs_2": [ 1 ],
-                        "soracle_internal_lrs_2[1]": [ 1 ],
-                        "soracle_internal_lrs_2[2]": [ 1 ],
-                        "soracle_internal_weights": [ 0.25, 0.25, 0.25 ],
-                        "soracle_taboo_length": [ 10 ],
-                        "soracle_temperature": [ 2.0 ],
-                        "soracle_window_size": [ 2 ],
+                        "soracle_continuity": [ 0 ],
+                        "soracle_external_lrs_1": [ 0 ],
+                        "soracle_external_lrs_2": [ 0 ],
+                        "soracle_external_weights": [ 0.46719992857128384, 0.407999926809801, 0.3783999259290596 ],
+                        "soracle_internal_lrs_1": [ 0 ],
+                        "soracle_internal_lrs_2": [ 0 ],
+                        "soracle_internal_lrs_2[1]": [ 0 ],
+                        "soracle_internal_lrs_2[2]": [ 0 ],
+                        "soracle_internal_weights": [ 0.6743999347364737, 0.4967999294520253, 0.3339999246079475 ],
+                        "soracle_taboo_length": [ 0 ],
+                        "soracle_temperature": [ 0.01 ],
+                        "soracle_window_size": [ 0 ],
                         "sparse": [ 0 ],
                         "tabooduration": [ 0 ],
                         "timeout": [ 2.0 ],
@@ -33732,7 +33742,7 @@
                 "box": {
                     "comment": "(any) messages to player",
                     "id": "obj-1",
-                    "index": 0,
+                    "index": 1,
                     "maxclass": "inlet",
                     "numinlets": 0,
                     "numoutlets": 1,
@@ -34268,7 +34278,7 @@
                     "patching_rect": [ 1965.0, 89.0, 180.0, 27.0 ],
                     "presentation": 1,
                     "presentation_rect": [ 21.41666666666697, 11.5, 401.10262443239094, 27.0 ],
-                    "text": "Player_1316",
+                    "text": "Player_6136",
                     "textcolor": [ 0.717647058823529, 0.717647058823529, 0.717647058823529, 1.0 ],
                     "textjustification": 1
                 }
@@ -34623,7 +34633,7 @@
                 "box": {
                     "comment": "(list) parameters",
                     "id": "obj-388",
-                    "index": 0,
+                    "index": 3,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -35765,7 +35775,7 @@
                 "box": {
                     "comment": "(any) rendering messages from server",
                     "id": "obj-119",
-                    "index": 0,
+                    "index": 1,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -37824,6 +37834,7 @@
             {
                 "patchline": {
                     "destination": [ "obj-7", 0 ],
+                    "order": 1,
                     "source": [ "obj-1239", 16 ]
                 }
             },
@@ -37846,6 +37857,13 @@
                 "patchline": {
                     "destination": [ "obj-812", 0 ],
                     "source": [ "obj-1239", 9 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-948", 0 ],
+                    "order": 0,
+                    "source": [ "obj-1239", 16 ]
                 }
             },
             {
@@ -43970,129 +43988,6 @@
                 }
             }
         ],
-        "parameters": {
-            "obj-1001::obj-89::obj-1": [ "live.text[6]", "live.text", 0 ],
-            "obj-1001::obj-89::obj-2": [ "live.text[5]", "live.text", 0 ],
-            "obj-1001::obj-89::obj-3": [ "live.text[4]", "live.text", 0 ],
-            "obj-1039::obj-89::obj-1": [ "live.text[9]", "live.text", 0 ],
-            "obj-1039::obj-89::obj-2": [ "live.text[8]", "live.text", 0 ],
-            "obj-1039::obj-89::obj-3": [ "live.text[7]", "live.text", 0 ],
-            "obj-1105": [ "harmonincpeakdecay[8]", "harmonincpeakdecay", 0 ],
-            "obj-1115": [ "continuity[1]", "continuity", 0 ],
-            "obj-1175": [ "heldnotesmode[2]", "heldnotesmode", 0 ],
-            "obj-1179": [ "continuity[16]", "continuity", 0 ],
-            "obj-12": [ "melodicmod12[1]", "melodicmod12", 0 ],
-            "obj-120": [ "melodicbypass[1]", "melodicbypass", 0 ],
-            "obj-1218": [ "simultaneousonsets[2]", "artificialmidities", 0 ],
-            "obj-126": [ "harmonicbypass[1]", "harmonicbypass", 0 ],
-            "obj-134": [ "continuity[17]", "continuity", 0 ],
-            "obj-1344": [ "enforcetaboo[4]", "enforcetaboo", 0 ],
-            "obj-140": [ "resetinfluences[1]", "resetinfluences", 0 ],
-            "obj-144": [ "harmonicngramorder[1]", "harmonicngramorder", 0 ],
-            "obj-1444": [ "outputprobability[4]", "outputprobability", 0 ],
-            "obj-152": [ "selfngramorder[1]", "selfngramorder", 0 ],
-            "obj-154": [ "melodicngramorder[4]", "melodicngramorder", 0 ],
-            "obj-19": [ "selfmod12[4]", "selfmod12", 0 ],
-            "obj-22": [ "selfmelodicbypass[1]", "selfmelodicbypass", 0 ],
-            "obj-254": [ "harmonincpeakdecay[2]", "harmonincpeakdecay", 0 ],
-            "obj-255": [ "melodicpeakdecay[4]", "melodicpeakdecay", 0 ],
-            "obj-256": [ "selfpeakdecay[1]", "selfpeakdecay", 0 ],
-            "obj-270::obj-1226": [ "width[1]", "Width", 0 ],
-            "obj-270::obj-1227": [ "center[1]", "Center", 0 ],
-            "obj-270::obj-1240": [ "live.slider[3]", "live.slider", 0 ],
-            "obj-270::obj-1241": [ "live.numbox[3]", "live.numbox[2]", 0 ],
-            "obj-270::obj-622": [ "__exp_velocityenable[1]", "__exp_velocityenable", 0 ],
-            "obj-270::obj-889": [ "weight[1]", "Weight", 0 ],
-            "obj-295": [ "playingmode[4]", "playingmode", 0 ],
-            "obj-298": [ "simultaneousonsets[7]", "simultaneousonsets", 0 ],
-            "obj-328": [ "decaybasis[1]", "decaybasis", 0 ],
-            "obj-387::obj-89::obj-1": [ "live.text[15]", "live.text", 0 ],
-            "obj-387::obj-89::obj-2": [ "live.text[14]", "live.text", 0 ],
-            "obj-387::obj-89::obj-3": [ "live.text[13]", "live.text", 0 ],
-            "obj-497::obj-89::obj-1": [ "live.text[10]", "live.text", 0 ],
-            "obj-497::obj-89::obj-2": [ "live.text[12]", "live.text", 0 ],
-            "obj-497::obj-89::obj-3": [ "live.text[11]", "live.text", 0 ],
-            "obj-570": [ "__exp_melodicpitchfromchords[4]", "__exp_melodicpitchfromchords", 0 ],
-            "obj-575": [ "__exp_tempoconsistencysigma[4]", "__exp_tempoconsistencysigma", 0 ],
-            "obj-642": [ "__exp_numnotessigma[1]", "__exp_numnotessigma", 0 ],
-            "obj-653": [ "__exp_numnotesenable[4]", "__exp_numnotesenable", 0 ],
-            "obj-656": [ "__exp_numnotesmu[1]", "__exp_numnotesmu", 0 ],
-            "obj-667": [ "selfharmonicbypass[1]", "selfharmonicbypass", 0 ],
-            "obj-670": [ "harmonicbypass[2]", "harmonicbypass", 0 ],
-            "obj-679": [ "selfharmonicngramorder[1]", "selfharmonicngramorder", 0 ],
-            "obj-685": [ "harmonincpeakdecay[5]", "harmonincpeakdecay[1]", 0 ],
-            "obj-688": [ "__exp_durationsigma[4]", "__exp_durationsigma", 0 ],
-            "obj-702": [ "__exp_durationmu[1]", "__exp_durationmu", 0 ],
-            "obj-722": [ "__exp_octavebandsenable[4]", "__exp_octavebandsenable", 0 ],
-            "obj-733": [ "__exp_octavebands[1]", "__exp_octavebands", 0 ],
-            "obj-746": [ "__exp_selfpitchfromchords[4]", "__exp_selfpitchfromchords", 0 ],
-            "obj-763": [ "__exp_autojumpforcejump[1]", "__exp_autojumpforcejump", 0 ],
-            "obj-774": [ "__exp_autojumpenable[1]", "__exp_autojumpenable", 0 ],
-            "obj-777": [ "__exp_autojumpactivate[1]", "__exp_autojumpactivate", 0 ],
-            "obj-799": [ "__exp_tempoconsistencyenable[4]", "__exp_tempoconsistencyenable", 0 ],
-            "obj-802": [ "__exp_tempoconsistencylen[4]", "__exp_tempoconsistencylen", 0 ],
-            "obj-814": [ "harmonincpeakdecay[6]", "harmonincpeakdecay", 0 ],
-            "obj-842::obj-89::obj-1": [ "live.text[2]", "live.text", 0 ],
-            "obj-842::obj-89::obj-2": [ "live.text[1]", "live.text", 0 ],
-            "obj-842::obj-89::obj-3": [ "live.text[3]", "live.text", 0 ],
-            "obj-843": [ "harmonicngramorder[2]", "harmonicngramorder", 0 ],
-            "obj-860": [ "harmonincpeakdecay[3]", "harmonincpeakdecay[1]", 0 ],
-            "obj-865": [ "selfharmonicngramorder[4]", "selfharmonicngramorder", 0 ],
-            "obj-870": [ "selfharmonicbypass[4]", "selfharmonicbypass", 0 ],
-            "obj-871": [ "harmonincpeakdecay[7]", "harmonincpeakdecay", 0 ],
-            "obj-96::obj-89::obj-1": [ "live.text[121]", "live.text", 0 ],
-            "obj-96::obj-89::obj-2": [ "live.text[120]", "live.text", 0 ],
-            "obj-96::obj-89::obj-3": [ "live.text[122]", "live.text", 0 ],
-            "parameter_overrides": {
-                "obj-1001::obj-89::obj-1": {
-                    "parameter_longname": "live.text[6]"
-                },
-                "obj-1001::obj-89::obj-2": {
-                    "parameter_longname": "live.text[5]"
-                },
-                "obj-1001::obj-89::obj-3": {
-                    "parameter_longname": "live.text[4]"
-                },
-                "obj-1039::obj-89::obj-1": {
-                    "parameter_longname": "live.text[9]"
-                },
-                "obj-1039::obj-89::obj-2": {
-                    "parameter_longname": "live.text[8]"
-                },
-                "obj-1039::obj-89::obj-3": {
-                    "parameter_longname": "live.text[7]"
-                },
-                "obj-387::obj-89::obj-1": {
-                    "parameter_longname": "live.text[15]"
-                },
-                "obj-387::obj-89::obj-2": {
-                    "parameter_longname": "live.text[14]"
-                },
-                "obj-387::obj-89::obj-3": {
-                    "parameter_longname": "live.text[13]"
-                },
-                "obj-497::obj-89::obj-1": {
-                    "parameter_longname": "live.text[10]"
-                },
-                "obj-497::obj-89::obj-2": {
-                    "parameter_longname": "live.text[12]"
-                },
-                "obj-497::obj-89::obj-3": {
-                    "parameter_longname": "live.text[11]"
-                },
-                "obj-842::obj-89::obj-1": {
-                    "parameter_longname": "live.text[2]"
-                },
-                "obj-842::obj-89::obj-2": {
-                    "parameter_longname": "live.text[1]"
-                },
-                "obj-842::obj-89::obj-3": {
-                    "parameter_longname": "live.text[3]"
-                }
-            },
-            "inherited_shortname": 1
-        },
-        "autosave": 0,
         "boxgroups": [
             {
                 "boxes": [ "obj-442", "obj-441", "obj-439", "obj-150" ]
