@@ -32,7 +32,7 @@ from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduli
 
 # experimental features
 from somax.features.speed_features import TempogramCoeffOnset, TempogramCoeffMean
-
+from somax.features.latent_features import LatentSpaceEncoder
 class AudioSegmentation(Enum):
     ONSET = "onset"
     INTERVAL = "interval"
@@ -319,7 +319,7 @@ class CorpusBuilder:
             except FeatureError as e:
                 self.logger.debug(repr(e))
 
-        experimental_features = [TempogramCoeffOnset, TempogramCoeffMean]
+        experimental_features = [TempogramCoeffOnset, TempogramCoeffMean, LatentSpaceEncoder]
         for feature in experimental_features:
             try:
                 print("analyzing experimental feature",feature)
