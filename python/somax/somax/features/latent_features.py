@@ -89,8 +89,20 @@ class LatentSpaceEncoder(AnalyzableFeature):
 
     @classmethod
     def segment_wav(
-        cls, wav: np.ndarray, sr: int, time_instants: List[float]
+        cls, wav: np.ndarray, sr: int, time_instants: List[float], min_samples: int = 2048
     ) -> List[tuple[torch.Tensor, float]]:
+        """
+        Segmente le signal audio selon une liste d'instants temporels.
+        
+        Args:
+            wav: array numpy du signal audio
+            sr: sample rate en Hz
+            time_instants: liste d'instants en secondes
+            min_samples: longueur minimale d'un segment (nécessaire pour STFT, défaut: 2048)
+        
+        Returns:
+            segments: liste de tuples (segment_tensor, start_time)
+        """
         # Convertir les instants temporels en indices d'échantillons
         print("segmenting wav at sr", sr)
         print("time instants", time_instants)
@@ -126,6 +138,14 @@ class LatentSpaceEncoder(AnalyzableFeature):
             # Éviter les segments vides
             if start_sample < end_sample:
                 segment_np = wav[start_sample:end_sample]
+                segment_length = len(segment_np)
+                
+                # Si le segment est trop court, ajouter du padding avec des zéros
+                if segment_length < min_samples:
+                    print(f"Padding segment from {segment_length} to {min_samples} samples")
+                    pad_length = min_samples - segment_length
+                    segment_np = np.pad(segment_np, (0, pad_length), mode='constant', constant_values=0)
+                
                 segment_tensor = torch.from_numpy(segment_np).unsqueeze(0)  # (1, T)
 
                 segments.append((segment_tensor, time_instants[i]))
