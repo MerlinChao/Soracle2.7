@@ -403,6 +403,10 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def influence(self, path: str, feature_keyword: str, *value) -> None:
+        print("influence called")
+        print( "all value",value)
+        print( "feature_keyword",feature_keyword)
+        print( "path",path)
         if not self.scheduling_handler.running or self.player.corpus is None:
             return
 

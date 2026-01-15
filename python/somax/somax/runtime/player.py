@@ -54,6 +54,7 @@ class Player(Parametric, ContentAware):
 
         self.vmo_player: VMO_Player = None
         self.vmo_player_enabled: bool =ParamWithSetter(False, 0, 1, bool, 'vmo_player_enabled', self.enable_vmo_player)
+        self.memory_vmo: bool =ParamWithSetter(False, 0, 1, bool, 'memory_vmo', self.enable_memory_vmo)
 
 
         self.atoms: Dict[str, Atom] = {}
@@ -109,6 +110,9 @@ class Player(Parametric, ContentAware):
             event_and_transform = self._force_jump()
             output_from_match: bool = True
         else:
+            if self.vmo_player_enabled.value and self.vmo_player is not None and self.memory_vmo.value:
+                pass
+
             self._update_peaks_on_new_event(scheduler_time)
             peaks: Peaks = self._merged_peaks(scheduler_time, self.corpus)
             taboo_mask: TabooMask = TabooMask(self.corpus)
@@ -503,6 +507,10 @@ class Player(Parametric, ContentAware):
     def enable_vmo_player(self, state):
         print(f"enable_vmo_state: {state}")
         self.vmo_player_enabled.value = bool(state)
+    
+    def enable_memory_vmo(self, state):
+        print(f"enable_memory_vmo_state: {state}")
+        self.memory_vmo.value = bool(state)
 
     def visualisation_PNG_v2(self, list_feature, lrs_threshold:list[int]):
         self.vmo_player.visualisation_PNG(list_feature, lrs_threshold)
