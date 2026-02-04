@@ -120,6 +120,9 @@ class NGramMemorySpace(AbstractMemorySpace):
 
     def influence(self, labels: List[Tuple[IntLabel, AbstractTransform]], time: float,
                   **_kwargs) -> List[PeakEvent]:
+
+
+        #TODO this is important , i need to look at it later          
         matches: List[PeakEvent] = []
         for (label, transform) in labels:
             label_value: int = label.label

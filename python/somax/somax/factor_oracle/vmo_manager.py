@@ -1,6 +1,7 @@
 
 import numpy as np
 from collections import deque
+from somax.runtime.peaks import Peaks
 from somax.factor_oracle.candidate import Candidate
 from somax.runtime.corpus import Corpus
 from numpy import ndarray
@@ -211,6 +212,12 @@ class  VMOManager(Parametric):
         return candidates
     
     
+
+    def get_candidates_for_peaks(self, feature, position, transpositions) -> List[Peaks]:
+        vmo = self.VMOs[feature]
+        candidates = self._get_candidates_from_VMO(vmo, (position,position +1), feature, transpositions=transpositions)
+        return candidates
+
     #TODO: impelement a efficeint way to calculate the lrs
     def calculate_lrs(self, index: int, destination_index: int, vmo: MO) -> float:
         length = 0
@@ -262,15 +269,19 @@ class  VMOManager(Parametric):
         self.weights.value = weights
     
 
-
-
+ 
     def find_transpose(self, index,vmo: MO, transpositions, feature):
         L = []
         #print(self.transpositions)
+        print("feature in find_tranpose",feature)
+        # TODO: refactor classifier selection
         if feature == YinDiscretePitch:
             classifier = self.pitchclassifier
         elif feature == OnsetChroma:
             classifier = self.chromaclassifier
+        elif feature == Mfcc:
+            # no need to transpose mfcc
+            return []
         else:
             raise ValueError(f"Unrecognized feature type: {feature}")
 
@@ -292,6 +303,9 @@ class  VMOManager(Parametric):
                     transform = TransposeTransform(transpo)
                 #TODO isn'it a decalage between corpus index and vmo index ?
                 word = [self.corpus.events[index]]
+                print("transform in find_transpose",transform)
+                print("event in find_transpose",self.corpus.events[index])
+
                 transpo_word = [classifier.classify_event(transform.apply(self.current_transposition.inverse(event))).label for event in word]
                 #print("transpo_word",transpo_word)
                 flag = True

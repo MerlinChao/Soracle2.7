@@ -22,6 +22,7 @@ from typing import List, Optional, Type
 import numpy as np
 
 
+from somax.runtime.peaks import Peaks
 from somax.classification.classifier import AbstractClassifier
 from somax.classification.chroma_classifiers import  SomChromaClassifier
 from somax.classification.pitch_classifiers import PitchClassifier, PitchClassClassifier
@@ -115,7 +116,7 @@ class VMO_Player(Parametric):
         self.last_onset_time = 0.0
         self.current_delta_time = 0.0
 
-        self.set_corpus(corpus) # maybe this should n't be here but otherwise the Vmos are not created correctly
+        self.set_corpus(corpus) # maybe this shouldn't be here but otherwise the Vmos are not created correctly
 
 
     def new_event(self):
@@ -152,6 +153,8 @@ class VMO_Player(Parametric):
         candidates =  self.navigator.get_candidates()
 
         filtered_candidates = self.influence_handler.manage_candidates(candidates)
+
+
 
         
         print("nb_filtered",len(candidates),len(filtered_candidates))
@@ -203,6 +206,38 @@ class VMO_Player(Parametric):
         return current_delta_time
         
 
+    # pour memory + vmo
+    def get_peaks(self, atom_name: str) -> Peaks:
+        print("getting peaks for atom:",atom_name)
+        feature = self.atom_name_to_feature(atom_name)
+        position = self.navigator.position_event
+        transpositions = self.navigator.transpositions.value
+        candidates : Candidate = self.vmo_manager.get_candidates_for_peaks(feature, position, transpositions)
+        peaks : Peaks = self.candidate_to_peaks(candidates)
+        return peaks
+    
+
+    def candidate_to_peaks(self, candidates: List[Candidate]) -> Peaks:
+        if not candidates:
+            return Peaks.create_empty()
+        
+        scores = np.array([candidate.lrs for candidate in candidates], dtype=float)
+        times = np.array([candidate.event._absolute_onset for candidate in candidates], dtype=float)
+        #TODO that's hardcoded with no transform for now
+        transform_hashes = np.zeros(len(candidates), dtype=np.int32)
+        
+        return Peaks(scores, times, transform_hashes)
+
+    def atom_name_to_feature(self, atom_name: str) -> str:
+        mapping = {
+            "self": YinDiscretePitch,
+            "selfharmonic": OnsetChroma,
+            "selfmfcc": Mfcc
+        }
+        try:
+            return mapping[atom_name]
+        except KeyError:
+            raise ValueError(f"Unrecognized atom name: {atom_name}") 
 
     def update_region_mask(self, region_mask: RegionMask):
         self.navigator.region_mask = region_mask
@@ -252,6 +287,9 @@ class VMO_Player(Parametric):
         dict_nb_internal_matches = self.vmo_manager.dict_nb_internal_matches
         dict_nb_external_matches = self.influence_handler.dict_nb_external_matches
         match = self.influence_handler.match
+        #print("dict_nb_internal_matches",dict_nb_internal_matches)
+        #print("dict_nb_external_matches",dict_nb_external_matches)
+        #print("match",match)
         return dict_nb_external_matches, dict_nb_internal_matches, match
 
    

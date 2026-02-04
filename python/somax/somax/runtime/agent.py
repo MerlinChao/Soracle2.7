@@ -207,6 +207,10 @@ class OscAgent(Agent, AsyncioOscObject):
                                                                    scheduler_tempo,
                                                                    enforce_output=False)
             self._send_output_statistics()
+
+            #ajout VMO
+            self.send_match_statistics()
+
         except InvalidCorpus as e:
             self.logger.debug(str(e))
             self.scheduling_handler.add_trigger_event(trigger, reschedule=True)
@@ -403,10 +407,10 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def influence(self, path: str, feature_keyword: str, *value) -> None:
-        print("influence called")
-        print( "all value",value)
-        print( "feature_keyword",feature_keyword)
-        print( "path",path)
+        #print("influence called")
+        #print( "all value",value)
+        #print( "feature_keyword",feature_keyword)
+        #print( "path",path)
         if not self.scheduling_handler.running or self.player.corpus is None:
             return
 
@@ -891,6 +895,9 @@ class OscAgent(Agent, AsyncioOscObject):
     def enable_vmo(self, state: int):
         self.player.enable_vmo_player(state)
 
+    def enable_memory_vmo(self, state: int):
+        self.player.enable_memory_vmo(state)
+
     def visualisation_PNG_v2(self, list_feature, lrs_threshold:list[int]):
         self.player.visualisation_PNG_v2(list_feature, lrs_threshold)
     
@@ -938,7 +945,7 @@ class OscAgent(Agent, AsyncioOscObject):
         feature_mapping: Dict[Type[CorpusFeature], str] = {
                 YinDiscretePitch: "Pitch",
                 OnsetChroma: "Chroma",
-                Mfcc: "MFCC",
+                Mfcc: "Mfcc",
                 SpectralCentroid: "SC",
                 RMS: "RMS"
             }
