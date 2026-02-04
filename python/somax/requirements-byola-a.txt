@@ -1,0 +1,11 @@
+# Specific sound processing
+soundfile
+
+# PyTorch and related libraries
+torch
+torchaudio
+torchvision
+pytorch_lightning
+fire
+easydict
+tqdm

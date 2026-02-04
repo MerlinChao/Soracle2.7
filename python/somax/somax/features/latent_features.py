@@ -74,7 +74,10 @@ class LatentSpaceEncoder(AnalyzableFeature):
 
         metadata: AudioMetadata = typing.cast(AudioMetadata, metadata)
         # TODO: Pass rather than hard-code
-        wav, sr = sf.read(metadata.filename, dtype="float32")
+        wav, sr = sf.read(metadata.filename, dtype="float32")  # type: ignore
+
+        if wav.ndim == 2:
+            wav = wav.mean(axis=1)
 
         segments: List[tuple[torch.Tensor, float]] = cls.segment_wav(
             wav, sr, [event.onset for event in events]
@@ -88,6 +91,7 @@ class LatentSpaceEncoder(AnalyzableFeature):
             ][0]
 
             # Convert to a log-mel spectrogram, then normalize.
+            print(segment_tensor.size())
             lms = normalizer(
                 (to_melspec(segment_tensor) + torch.finfo(torch.float).eps).log()
             )

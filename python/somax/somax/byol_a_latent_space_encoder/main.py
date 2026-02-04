@@ -1,6 +1,6 @@
-from somax.byol_a_latent_space_encoder.byol_a.common import *
-from somax.byol_a_latent_space_encoder.byol_a.augmentations import PrecomputedNorm
-from somax.byol_a_latent_space_encoder.byol_a.models import AudioNTT2020
+from byol_a.common import *
+from byol_a.augmentations import PrecomputedNorm
+from byol_a.models import AudioNTT2020
 
 import soundfile as sf
 import torch
@@ -99,6 +99,7 @@ for segment_tensor, start_time, end_time in segments:
     start = time.time()
 
     # Convert to a log-mel spectrogram, then normalize.
+    print((to_melspec(segment_tensor) + torch.finfo(torch.float).eps).log().size())
     lms = normalizer((to_melspec(segment_tensor) + torch.finfo(torch.float).eps).log())
 
     # Now, convert the audio to the representation.
