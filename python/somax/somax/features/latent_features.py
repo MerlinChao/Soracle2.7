@@ -91,7 +91,6 @@ class LatentSpaceEncoder(AnalyzableFeature):
             ][0]
 
             # Convert to a log-mel spectrogram, then normalize.
-            print(segment_tensor.size())
             lms = normalizer(
                 (to_melspec(segment_tensor) + torch.finfo(torch.float).eps).log()
             )
