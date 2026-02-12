@@ -9,6 +9,7 @@
 	</Configurations>
 	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="f53f308c-da26-3cd8-8c97-10d0e9deebab" DefaultStartup="true">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="source/soracle.byol_a_latent_space_encoder/soracle.byol_a_latent_space_encoder.vcxproj"/>
 		<BuildDependency Project="source/soracle.example/soracle.example.vcxproj"/>
 		<Build Solution="Debug|*" Project="false"/>
 		<Build Solution="Release|*" Project="false"/>
@@ -16,6 +17,9 @@
 		<Build Solution="RelWithDebInfo|*" Project="false"/>
 	</Project>
 	<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="4b97a383-bcc8-354e-baf3-b0c392935a37"/>
+	<Project Path="source/soracle.byol_a_latent_space_encoder/soracle.byol_a_latent_space_encoder.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="4ee577f8-eba0-396b-8993-a3ee3c5e8641">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
 	<Project Path="source/soracle.example/soracle.example.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="a80640ce-a22f-3536-a621-094e39f3173c">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>

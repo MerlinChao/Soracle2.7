@@ -37,6 +37,11 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/natha/Documents/Somax/Soracle2.7/build/source/soracle.example/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/natha/Documents/Somax/Soracle2.7/build/source/soracle.byol_a_latent_space_encoder/cmake_install.cmake")
+endif()
+
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)

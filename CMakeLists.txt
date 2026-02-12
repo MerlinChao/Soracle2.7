@@ -10,3 +10,4 @@ set(C74_MAX_SDK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/max-sdk/source/max-sdk-base")
 
 # Add your external projects here
 add_subdirectory(source/soracle.example)
+add_subdirectory(source/soracle.byol_a_latent_space_encoder)
