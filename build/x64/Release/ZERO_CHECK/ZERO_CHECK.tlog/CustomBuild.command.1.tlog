@@ -1,0 +1,10 @@
+^C:\USERS\NATHA\DOCUMENTS\SOMAX\SORACLE2.7\BUILD\CMAKEFILES\5BB1BB159C3778F0ED9D58C941B11361\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/natha/Documents/Somax/Soracle2.7 -BC:/Users/natha/Documents/Somax/Soracle2.7/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/natha/Documents/Somax/Soracle2.7/build/Soracle-MaxExternals.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

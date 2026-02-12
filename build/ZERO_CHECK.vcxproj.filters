@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\natha\Documents\Somax\Soracle2.7\build\CMakeFiles\5bb1bb159c3778f0ed9d58c941b11361\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D52FAD4D-45E7-306B-9753-6D7956BE83FD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
