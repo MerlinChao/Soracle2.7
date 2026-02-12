@@ -1,1 +1,20 @@
+# LibTorch libraries (users should download separately)
 libtorch/
+
+# Build artifacts and large DLL files
+build/
+externals/*.dll
+*.mxe64.dSYM/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
