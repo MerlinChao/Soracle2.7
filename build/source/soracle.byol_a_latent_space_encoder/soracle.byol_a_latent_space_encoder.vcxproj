@@ -59,25 +59,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\natha\Documents\Somax\externals\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\natha\Documents\Somax\Soracle2.7\externals\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">soracle.byol_a_latent_space_encoder.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">soracle.byol_a_latent_space_encoder</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.mxe64</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\natha\Documents\Somax\externals\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\natha\Documents\Somax\Soracle2.7\externals\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">soracle.byol_a_latent_space_encoder.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">soracle.byol_a_latent_space_encoder</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.mxe64</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\natha\Documents\Somax\externals\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\natha\Documents\Somax\Soracle2.7\externals\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">soracle.byol_a_latent_space_encoder.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">soracle.byol_a_latent_space_encoder</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.mxe64</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\natha\Documents\Somax\externals\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\natha\Documents\Somax\Soracle2.7\externals\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">soracle.byol_a_latent_space_encoder.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">soracle.byol_a_latent_space_encoder</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.mxe64</TargetExt>
@@ -129,7 +129,7 @@
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/externals
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/Soracle2.7/externals
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -202,7 +202,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/externals
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/Soracle2.7/externals
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -275,7 +275,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/externals/MinSizeRel
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/Soracle2.7/externals/MinSizeRel
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -347,7 +347,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message></Message>
       <Command>setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/externals/RelWithDebInfo
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/c10.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiomp5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/libiompstubs5md.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_cpu.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/torch_global_deps.dll C:/Users/natha/Documents/Somax/Soracle2.7/source/soracle.byol_a_latent_space_encoder/../../libtorch/lib/uv.dll C:/Users/natha/Documents/Somax/Soracle2.7/externals/RelWithDebInfo
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone

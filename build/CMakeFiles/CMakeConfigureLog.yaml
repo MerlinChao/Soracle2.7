@@ -90,7 +90,7 @@ events:
       The output was:
       0
       Version MSBuild 18.3.0-release-26070-10+3972042b7 pour .NET Framework
-      La g├®n├®ration a d├®marr├® 12/02/2026 16:18:46.
+      La g├®n├®ration a d├®marr├® 12/02/2026 17:21:56.
       
       Projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
       PrepareForBuild:
@@ -119,7 +119,7 @@ events:
           0 Avertissement(s)
           0 Erreur(s)
       
-      Temps ├®coul├® 00:00:02.02
+      Temps ├®coul├® 00:00:02.50
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -962,7 +962,7 @@ events:
       The output was:
       0
       Version MSBuild 18.3.0-release-26070-10+3972042b7 pour .NET Framework
-      La g├®n├®ration a d├®marr├® 12/02/2026 16:18:49.
+      La g├®n├®ration a d├®marr├® 12/02/2026 17:21:59.
       
       Projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\4.2.3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
       PrepareForBuild:
@@ -991,7 +991,7 @@ events:
           0 Avertissement(s)
           0 Erreur(s)
       
-      Temps ├®coul├® 00:00:01.95
+      Temps ├®coul├® 00:00:02.07
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -1503,8 +1503,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-47etfz"
-      binary: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-47etfz"
+      source: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-88guuu"
+      binary: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-88guuu"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1513,39 +1513,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-47etfz'
+        Change Dir: 'C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-88guuu'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_408d8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_91956.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         Version MSBuild 18.3.0-release-26070-10+3972042b7 pour .NET Framework
-        La g├®n├®ration a d├®marr├® 12/02/2026 16:18:51.
+        La g├®n├®ration a d├®marr├® 12/02/2026 17:22:02.
         
-        Projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-47etfz\\cmTC_408d8.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
+        Projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-88guuu\\cmTC_91956.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
         PrepareForBuild:
           La sortie structur├®e est activ├®e. La mise en forme du compilateur diagnostics refl├¿te la hi├®rarchie des erreurs. Pour plus dÔÇÖinformations, consultez https://aka.ms/cpp/structured-output.
-          Cr├®ation du r├®pertoire "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-47etfz\\Debug\\".
-          Cr├®ation du r├®pertoire "cmTC_408d8.dir\\Debug\\cmTC_408d8.tlog\\".
+          Cr├®ation du r├®pertoire "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-88guuu\\Debug\\".
+          Cr├®ation du r├®pertoire "cmTC_91956.dir\\Debug\\cmTC_91956.tlog\\".
         InitializeBuildStatus:
-          Cr├®ation de "cmTC_408d8.dir\\Debug\\cmTC_408d8.tlog\\unsuccessfulbuild", car "AlwaysCreate" a ├®t├® sp├®cifi├®.
-          Mise ├á jour de l'horodatage "cmTC_408d8.dir\\Debug\\cmTC_408d8.tlog\\unsuccessfulbuild".
+          Cr├®ation de "cmTC_91956.dir\\Debug\\cmTC_91956.tlog\\unsuccessfulbuild", car "AlwaysCreate" a ├®t├® sp├®cifi├®.
+          Mise ├á jour de l'horodatage "cmTC_91956.dir\\Debug\\cmTC_91956.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_408d8.dir\\Debug\\\\" /Fd"cmTC_408d8.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_91956.dir\\Debug\\\\" /Fd"cmTC_91956.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           Compilateur d'optimisation Microsoft (R) C/C++ version┬á19.50.35724 pour x64
           Copyright (C) Microsoft Corporation. Tous droits r├®serv├®s.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_408d8.dir\\Debug\\\\" /Fd"cmTC_408d8.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_91956.dir\\Debug\\\\" /Fd"cmTC_91956.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-47etfz\\Debug\\cmTC_408d8.exe" /INCREMENTAL /ILK:"cmTC_408d8.dir\\Debug\\cmTC_408d8.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-47etfz/Debug/cmTC_408d8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-47etfz/Debug/cmTC_408d8.lib" /MACHINE:X64  /machine:x64 cmTC_408d8.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_408d8.vcxproj -> C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-47etfz\\Debug\\cmTC_408d8.exe
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-88guuu\\Debug\\cmTC_91956.exe" /INCREMENTAL /ILK:"cmTC_91956.dir\\Debug\\cmTC_91956.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-88guuu/Debug/cmTC_91956.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-88guuu/Debug/cmTC_91956.lib" /MACHINE:X64  /machine:x64 cmTC_91956.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_91956.vcxproj -> C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-88guuu\\Debug\\cmTC_91956.exe
         FinalizeBuildStatus:
-          Suppression du fichier "cmTC_408d8.dir\\Debug\\cmTC_408d8.tlog\\unsuccessfulbuild".
-          Mise ├á jour de l'horodatage "cmTC_408d8.dir\\Debug\\cmTC_408d8.tlog\\cmTC_408d8.lastbuildstate".
-        G├®n├®ration du projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-47etfz\\cmTC_408d8.vcxproj" termin├®e (cibles par d├®faut).
+          Suppression du fichier "cmTC_91956.dir\\Debug\\cmTC_91956.tlog\\unsuccessfulbuild".
+          Mise ├á jour de l'horodatage "cmTC_91956.dir\\Debug\\cmTC_91956.tlog\\cmTC_91956.lastbuildstate".
+        G├®n├®ration du projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-88guuu\\cmTC_91956.vcxproj" termin├®e (cibles par d├®faut).
         
         La g├®n├®ration a r├®ussi.
             0 Avertissement(s)
             0 Erreur(s)
         
-        Temps ├®coul├® 00:00:01.76
+        Temps ├®coul├® 00:00:01.80
         
       exitCode: 0
   -
@@ -1585,8 +1585,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-t1t8zu"
-      binary: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-t1t8zu"
+      source: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-3h18rg"
+      binary: "C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-3h18rg"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1596,39 +1596,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-t1t8zu'
+        Change Dir: 'C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-3h18rg'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9f6b1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_bf07e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         Version MSBuild 18.3.0-release-26070-10+3972042b7 pour .NET Framework
-        La g├®n├®ration a d├®marr├® 12/02/2026 16:18:54.
+        La g├®n├®ration a d├®marr├® 12/02/2026 17:22:05.
         
-        Projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t1t8zu\\cmTC_9f6b1.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
+        Projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h18rg\\cmTC_bf07e.vcxproj" sur le n┼ôud 1 (cibles par d├®faut).
         PrepareForBuild:
           La sortie structur├®e est activ├®e. La mise en forme du compilateur diagnostics refl├¿te la hi├®rarchie des erreurs. Pour plus dÔÇÖinformations, consultez https://aka.ms/cpp/structured-output.
-          Cr├®ation du r├®pertoire "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t1t8zu\\Debug\\".
-          Cr├®ation du r├®pertoire "cmTC_9f6b1.dir\\Debug\\cmTC_9f6b1.tlog\\".
+          Cr├®ation du r├®pertoire "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h18rg\\Debug\\".
+          Cr├®ation du r├®pertoire "cmTC_bf07e.dir\\Debug\\cmTC_bf07e.tlog\\".
         InitializeBuildStatus:
-          Cr├®ation de "cmTC_9f6b1.dir\\Debug\\cmTC_9f6b1.tlog\\unsuccessfulbuild", car "AlwaysCreate" a ├®t├® sp├®cifi├®.
-          Mise ├á jour de l'horodatage "cmTC_9f6b1.dir\\Debug\\cmTC_9f6b1.tlog\\unsuccessfulbuild".
+          Cr├®ation de "cmTC_bf07e.dir\\Debug\\cmTC_bf07e.tlog\\unsuccessfulbuild", car "AlwaysCreate" a ├®t├® sp├®cifi├®.
+          Mise ├á jour de l'horodatage "cmTC_bf07e.dir\\Debug\\cmTC_bf07e.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_9f6b1.dir\\Debug\\\\" /Fd"cmTC_9f6b1.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_bf07e.dir\\Debug\\\\" /Fd"cmTC_bf07e.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           Compilateur d'optimisation Microsoft (R) C/C++ version┬á19.50.35724 pour x64
           Copyright (C) Microsoft Corporation. Tous droits r├®serv├®s.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_9f6b1.dir\\Debug\\\\" /Fd"cmTC_9f6b1.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_bf07e.dir\\Debug\\\\" /Fd"cmTC_bf07e.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t1t8zu\\Debug\\cmTC_9f6b1.exe" /INCREMENTAL /ILK:"cmTC_9f6b1.dir\\Debug\\cmTC_9f6b1.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-t1t8zu/Debug/cmTC_9f6b1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-t1t8zu/Debug/cmTC_9f6b1.lib" /MACHINE:X64  /machine:x64 cmTC_9f6b1.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_9f6b1.vcxproj -> C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t1t8zu\\Debug\\cmTC_9f6b1.exe
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h18rg\\Debug\\cmTC_bf07e.exe" /INCREMENTAL /ILK:"cmTC_bf07e.dir\\Debug\\cmTC_bf07e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-3h18rg/Debug/cmTC_bf07e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/natha/Documents/Somax/Soracle2.7/build/CMakeFiles/CMakeScratch/TryCompile-3h18rg/Debug/cmTC_bf07e.lib" /MACHINE:X64  /machine:x64 cmTC_bf07e.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_bf07e.vcxproj -> C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h18rg\\Debug\\cmTC_bf07e.exe
         FinalizeBuildStatus:
-          Suppression du fichier "cmTC_9f6b1.dir\\Debug\\cmTC_9f6b1.tlog\\unsuccessfulbuild".
-          Mise ├á jour de l'horodatage "cmTC_9f6b1.dir\\Debug\\cmTC_9f6b1.tlog\\cmTC_9f6b1.lastbuildstate".
-        G├®n├®ration du projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-t1t8zu\\cmTC_9f6b1.vcxproj" termin├®e (cibles par d├®faut).
+          Suppression du fichier "cmTC_bf07e.dir\\Debug\\cmTC_bf07e.tlog\\unsuccessfulbuild".
+          Mise ├á jour de l'horodatage "cmTC_bf07e.dir\\Debug\\cmTC_bf07e.tlog\\cmTC_bf07e.lastbuildstate".
+        G├®n├®ration du projet "C:\\Users\\natha\\Documents\\Somax\\Soracle2.7\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3h18rg\\cmTC_bf07e.vcxproj" termin├®e (cibles par d├®faut).
         
         La g├®n├®ration a r├®ussi.
             0 Avertissement(s)
             0 Erreur(s)
         
-        Temps ├®coul├® 00:00:01.72
+        Temps ├®coul├® 00:00:01.75
         
       exitCode: 0
   -
@@ -1659,10 +1659,6 @@ events:
       Running the CXX compiler's linker: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/HostX64/x64/link.exe" "-v"
       Microsoft (R) Incremental Linker Version 14.50.35724.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
-...
-
----
-events:
   -
     kind: "find_package-v1"
     backtrace:
@@ -1782,91 +1778,19 @@ events:
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/MKLConfig.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/MKLConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mkl-config.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mkl-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/MKLConfig.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/MKLConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/x64/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/x64/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/mkl-config.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mkl-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -2078,43 +2002,11 @@ events:
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Users/natha/Documents/Somax/Soracle2.7/build/MKLConfig.cmake"
+        path: "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/MKLConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Users/natha/Documents/Somax/Soracle2.7/build/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/mkl-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/MKLConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/mkl-config.cmake"
+        path: "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/mkl-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -2153,17 +2045,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -2193,11 +2076,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -2323,91 +2202,19 @@ events:
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/MKLDNNConfig.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/MKLDNNConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mkldnn-config.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mkldnn-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/MKLDNNConfig.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/MKLDNNConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/x64/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Windows Kits/10/bin/x64/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/mkldnn-config.cmake"
+        path: "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mkldnn-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -2619,43 +2426,11 @@ events:
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Users/natha/Documents/Somax/Soracle2.7/build/MKLDNNConfig.cmake"
+        path: "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/MKLDNNConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/Users/natha/Documents/Somax/Soracle2.7/build/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/mkldnn-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/MKLDNNConfig.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/mkldnn-config.cmake"
+        path: "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/mkldnn-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -2694,17 +2469,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -2734,11 +2500,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -2822,17 +2584,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -2862,11 +2615,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -2895,9 +2644,6 @@ events:
     candidate_directories:
       - "C:/Users/natha/Documents/Somax/Soracle2.7/libtorch/lib/"
       - "C:/Users/natha/Documents/Somax/Soracle2.7/libtorch/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/lib/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/ucrt/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/um/x64/"
       - "C:/Users/natha/anaconda3/"
       - "C:/Users/natha/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/natha/anaconda3/Library/usr/bin/"
@@ -2905,17 +2651,8 @@ events:
       - "C:/Users/natha/anaconda3/Scripts/"
       - "C:/Users/natha/anaconda3/bin/"
       - "C:/Users/natha/anaconda3/condabin/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/"
-      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/"
-      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/"
+      - "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/gurobi1300/win64/bin/"
       - "C:/Python314/Scripts/"
       - "C:/Python314/"
@@ -2944,11 +2681,7 @@ events:
       - "C:/Users/natha/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/natha/AppData/Local/Muse Hub/lib/"
       - "C:/Users/natha/AppData/Roaming/npm/"
-      - "C:/Users/natha/Documents/Somax/Soracle2.7/build/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/"
+      - "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/lib/"
       - "C:/Program Files/"
       - "C:/Program Files (x86)/lib/"
@@ -2972,17 +2705,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -3012,11 +2736,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -3027,10 +2747,6 @@ events:
         - "C:/Program Files/Soracle-MaxExternals/bin"
         - "C:/Program Files/CMake/bin"
         - "/bin"
-      ENV{LIB}:
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\lib\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\ucrt\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\\\lib\\10.0.26100.0\\\\um\\x64"
   -
     kind: "find-v1"
     backtrace:
@@ -3053,9 +2769,6 @@ events:
     candidate_directories:
       - "C:/Users/natha/Documents/Somax/Soracle2.7/libtorch/lib/"
       - "C:/Users/natha/Documents/Somax/Soracle2.7/libtorch/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/lib/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/ucrt/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/um/x64/"
       - "C:/Users/natha/anaconda3/"
       - "C:/Users/natha/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/natha/anaconda3/Library/usr/bin/"
@@ -3063,17 +2776,8 @@ events:
       - "C:/Users/natha/anaconda3/Scripts/"
       - "C:/Users/natha/anaconda3/bin/"
       - "C:/Users/natha/anaconda3/condabin/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/"
-      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/"
-      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/"
+      - "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/gurobi1300/win64/bin/"
       - "C:/Python314/Scripts/"
       - "C:/Python314/"
@@ -3102,11 +2806,7 @@ events:
       - "C:/Users/natha/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/natha/AppData/Local/Muse Hub/lib/"
       - "C:/Users/natha/AppData/Roaming/npm/"
-      - "C:/Users/natha/Documents/Somax/Soracle2.7/build/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/"
+      - "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/lib/"
       - "C:/Program Files/"
       - "C:/Program Files (x86)/lib/"
@@ -3130,17 +2830,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -3170,11 +2861,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -3185,10 +2872,6 @@ events:
         - "C:/Program Files/Soracle-MaxExternals/bin"
         - "C:/Program Files/CMake/bin"
         - "/bin"
-      ENV{LIB}:
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\lib\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\ucrt\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\\\lib\\10.0.26100.0\\\\um\\x64"
   -
     kind: "find-v1"
     backtrace:
@@ -3210,9 +2893,6 @@ events:
     candidate_directories:
       - "C:/Users/natha/Documents/Somax/Soracle2.7/libtorch/lib/"
       - "C:/Users/natha/Documents/Somax/Soracle2.7/libtorch/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/lib/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/ucrt/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/Lib/10.0.26100.0/um/x64/"
       - "C:/Users/natha/anaconda3/"
       - "C:/Users/natha/anaconda3/Library/mingw-w64/bin/"
       - "C:/Users/natha/anaconda3/Library/usr/bin/"
@@ -3220,17 +2900,8 @@ events:
       - "C:/Users/natha/anaconda3/Scripts/"
       - "C:/Users/natha/anaconda3/bin/"
       - "C:/Users/natha/anaconda3/condabin/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/vcpackages/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/TestWindow/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/Roslyn/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/Extensions/Microsoft/CodeCoverage.Console/"
-      - "C:/Program Files (x86)/Windows Kits/10/bin/10.0.26100.0/x64/"
-      - "C:/Program Files (x86)/Windows Kits/10/bin/x64/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/MSBuild/Current/Bin/amd64/"
-      - "C:/Windows/Microsoft.NET/Framework64/v4.0.30319/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/Tools/"
+      - "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/natha/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/gurobi1300/win64/bin/"
       - "C:/Python314/Scripts/"
       - "C:/Python314/"
@@ -3259,11 +2930,7 @@ events:
       - "C:/Users/natha/AppData/Local/Programs/Microsoft VS Code/bin/"
       - "C:/Users/natha/AppData/Local/Muse Hub/lib/"
       - "C:/Users/natha/AppData/Roaming/npm/"
-      - "C:/Users/natha/Documents/Somax/Soracle2.7/build/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/Common7/IDE/VC/Linux/bin/ConnectionManagerExe/"
-      - "C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/vcpkg/"
+      - "C:/Users/natha/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/lib/"
       - "C:/Program Files/"
       - "C:/Program Files (x86)/lib/"
@@ -3287,17 +2954,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -3327,11 +2985,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -3342,10 +2996,6 @@ events:
         - "C:/Program Files/Soracle-MaxExternals/bin"
         - "C:/Program Files/CMake/bin"
         - "/bin"
-      ENV{LIB}:
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\lib\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\ucrt\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\\\lib\\10.0.26100.0\\\\um\\x64"
   -
     kind: "find_package-v1"
     backtrace:
@@ -3420,17 +3070,8 @@ events:
         - "C:\\Users\\natha\\anaconda3\\Scripts"
         - "C:\\Users\\natha\\anaconda3\\bin"
         - "C:\\Users\\natha\\anaconda3\\condabin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\VCPackages"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\bin\\Roslyn"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\Extensions\\Microsoft\\CodeCoverage.Console"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.26100.0\\x64"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\MSBuild\\Current\\Bin\\amd64"
-        - "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\Tools"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\natha\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\gurobi1300\\win64\\bin"
         - "C:\\Python314\\Scripts"
         - "C:\\Python314"
@@ -3460,11 +3101,7 @@ events:
         - "C:\\Users\\natha\\AppData\\Local\\Muse Hub\\lib"
         - "C:\\Users\\natha\\AppData\\Roaming\\npm"
         - "C:\\Users\\natha\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "."
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\Common7\\IDE\\VC\\Linux\\bin\\ConnectionManagerExe"
-        - "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools\\VC\\vcpkg"
+        - "c:\\Users\\natha\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files/Soracle-MaxExternals"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
