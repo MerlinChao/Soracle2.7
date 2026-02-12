@@ -1,1 +1,0 @@
-../max/somax/docs/tutorial-patchers/Template 2 Players.maxpat
