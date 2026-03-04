@@ -229,3 +229,7 @@ python/somax/log/*.log
 python/somax/temp
 max/somax/state/*.json
 *.pickle
+
+externals/
+*.mxo
+*.dylib
