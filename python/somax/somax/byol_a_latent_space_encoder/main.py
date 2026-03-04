@@ -35,7 +35,7 @@ model.load_weight("pretrained_weights/AudioNTT2020-BYOLA-64x96d2048.pth", device
 
 
 # Segmentation based on time instants
-def segment_wav(wav, sr, time_instants):
+def segment_wav(wav, sr, time_instants, max_segment_duration=10.0):
     """
     Segmente le signal audio selon une liste d'instants temporels.
 
@@ -43,11 +43,14 @@ def segment_wav(wav, sr, time_instants):
         wav: array numpy du signal audio
         sr: sample rate en Hz
         time_instants: liste d'instants en secondes (ex: [0.5, 1.2, 3.8])
+        max_segment_duration: durée maximale d'un segment en secondes (défaut: 10s)
 
     Returns:
         segments: liste de tuples (segment_tensor, start_time, end_time)
                   où segment_tensor est de forme (1, segment_length)
     """
+    max_samples = int(max_segment_duration * sr)
+
     # Convertir les instants temporels en indices d'échantillons
     instants_samples = [int(t * sr) for t in time_instants]
 
@@ -66,16 +69,20 @@ def segment_wav(wav, sr, time_instants):
         start_sample = instants_samples[i]
         end_sample = instants_samples[i + 1]
 
-        # Éviter les segments vides
-        if start_sample < end_sample:
-            segment_np = wav[start_sample:end_sample]
+        # Diviser en sous-segments si le segment est trop long
+        current_start = start_sample
+        while current_start < end_sample:
+            current_end = min(current_start + max_samples, end_sample)
+
+            segment_np = wav[current_start:current_end]
             segment_tensor = torch.from_numpy(segment_np).unsqueeze(0)  # (1, T)
 
             # Ajouter les temps en secondes pour référence
-            start_time = start_sample / sr
-            end_time = end_sample / sr
+            start_time = current_start / sr
+            end_time = current_end / sr
 
             segments.append((segment_tensor, start_time, end_time))
+            current_start = current_end
 
     return segments
 
@@ -87,19 +94,30 @@ wav, sr = sf.read("work/16k/Fabbrizio2c.wav", dtype="float32")
 if wav.ndim == 2:
     wav = wav.mean(axis=1)
 
-# Exemple : segmenter selon les instants en secondes [0.5, 1.2, 2.8, 5.0]
-time_instants = [0.5, 1.2, 2.8, 5.0]
-segments = segment_wav(wav, sr, time_instants)
+# Calcul de la durée totale en secondes
+total_duration = len(wav) / sr
+print(f"Durée totale du fichier: {total_duration:.2f}s")
+
+# Exemple : segmenter selon les instants en secondes
+# Ajuste max_segment_duration selon ta capacité mémoire (en secondes)
+time_instants = [0.5, 1.5, 2.5, 3.5]  # Exemples d'instants
+segments = segment_wav(wav, sr, time_instants, max_segment_duration=3.0)
 features_list = []
 
 tot_time = 0
 
-for segment_tensor, start_time, end_time in segments:
+print(f"Nombre de segments: {len(segments)}")
+
+for idx, (segment_tensor, start_time, end_time) in enumerate(segments):
+
+    segment_duration = end_time - start_time
+    print(
+        f"Segment {idx}: {start_time:.2f}s - {end_time:.2f}s ({segment_duration:.2f}s)"
+    )
 
     start = time.time()
 
     # Convert to a log-mel spectrogram, then normalize.
-    print((to_melspec(segment_tensor) + torch.finfo(torch.float).eps).log().size())
     lms = normalizer((to_melspec(segment_tensor) + torch.finfo(torch.float).eps).log())
 
     # Now, convert the audio to the representation.
@@ -107,4 +125,4 @@ for segment_tensor, start_time, end_time in segments:
 
     tot_time += time.time() - start
 
-print("Mean time of the calculation for one slice:", tot_time / len(segments), "s")
+print(f"Mean time of the calculation for one slice: {tot_time / len(segments):.4f}s")

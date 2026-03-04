@@ -9,11 +9,92 @@
             "modernui": 1
         },
         "classnamespace": "box",
-        "rect": [ 844.0, 168.0, 1021.0, 768.0 ],
+        "rect": [ 133.0, 93.0, 1248.0, 768.0 ],
         "openinpresentation": 1,
         "showontab": 0,
         "integercoordinates": 1,
         "boxes": [
+            {
+                "box": {
+                    "id": "obj-468",
+                    "maxclass": "comment",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "patching_rect": [ 685.0, 408.0, 150.0, 20.0 ],
+                    "presentation": 1,
+                    "presentation_rect": [ 455.0, 192.0, 150.0, 20.0 ],
+                    "text": "Memory"
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-462",
+                    "maxclass": "message",
+                    "numinlets": 2,
+                    "numoutlets": 1,
+                    "outlettype": [ "" ],
+                    "patching_rect": [ 3428.0, 337.0, 41.0, 22.0 ],
+                    "text": "set $1"
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-459",
+                    "maxclass": "newobj",
+                    "numinlets": 2,
+                    "numoutlets": 2,
+                    "outlettype": [ "", "" ],
+                    "patching_rect": [ 3428.0, 302.0, 155.0, 22.0 ],
+                    "text": "route enable_memory_vmo"
+                }
+            },
+            {
+                "box": {
+                    "color": [ 1.0, 0.0, 0.0, 1.0 ],
+                    "id": "obj-460",
+                    "maxclass": "newobj",
+                    "numinlets": 0,
+                    "numoutlets": 1,
+                    "outlettype": [ "" ],
+                    "patching_rect": [ 3428.0, 255.0, 117.0, 22.0 ],
+                    "text": "r #0_parameters"
+                }
+            },
+            {
+                "box": {
+                    "color": [ 0.1421581805, 0.6723723412, 0.2530546784, 1.0 ],
+                    "id": "obj-458",
+                    "maxclass": "newobj",
+                    "numinlets": 1,
+                    "numoutlets": 0,
+                    "patching_rect": [ 3428.0, 465.0, 150.0, 22.0 ],
+                    "text": "s #0_soracle_for_player"
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-457",
+                    "maxclass": "newobj",
+                    "numinlets": 1,
+                    "numoutlets": 1,
+                    "outlettype": [ "" ],
+                    "patching_rect": [ 3428.0, 413.0, 171.0, 22.0 ],
+                    "text": "prepend enable_memory_vmo"
+                }
+            },
+            {
+                "box": {
+                    "id": "obj-456",
+                    "maxclass": "toggle",
+                    "numinlets": 1,
+                    "numoutlets": 1,
+                    "outlettype": [ "int" ],
+                    "parameter_enable": 0,
+                    "patching_rect": [ 3428.0, 378.0, 24.0, 24.0 ],
+                    "presentation": 1,
+                    "presentation_rect": [ 507.0, 192.0, 20.0, 20.0 ]
+                }
+            },
             {
                 "box": {
                     "fontface": 1,
@@ -14207,8 +14288,38 @@
             },
             {
                 "patchline": {
+                    "destination": [ "obj-457", 0 ],
+                    "source": [ "obj-456", 0 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-458", 0 ],
+                    "source": [ "obj-457", 0 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-462", 0 ],
+                    "source": [ "obj-459", 0 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-459", 0 ],
+                    "source": [ "obj-460", 0 ]
+                }
+            },
+            {
+                "patchline": {
                     "destination": [ "obj-216", 0 ],
                     "source": [ "obj-461", 0 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-456", 0 ],
+                    "source": [ "obj-462", 0 ]
                 }
             },
             {
@@ -15337,6 +15448,14 @@
             "obj-94::obj-1": [ "live.text[54]", "live.text", 0 ],
             "obj-94::obj-2": [ "live.text[63]", "live.text", 0 ],
             "obj-94::obj-3": [ "live.text[64]", "live.text", 0 ],
+            "parameterbanks": {
+                "0": {
+                    "index": 0,
+                    "name": "",
+                    "parameters": [ "-", "-", "-", "-", "-", "-", "-", "-" ],
+                    "buttons": [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+                }
+            },
             "parameter_overrides": {
                 "obj-123::obj-1": {
                     "parameter_longname": "live.text[10]"

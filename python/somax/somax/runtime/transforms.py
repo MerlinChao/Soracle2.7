@@ -11,6 +11,7 @@ from somax.features.pitch_features import BaseIntegerPitch, PitchTypes
 from somax.runtime.corpus_event import CorpusEvent, MidiCorpusEvent
 from somax.runtime.exceptions import TransformError, TransformIdentityError
 from somax.utils.introspective import StringParsed
+from somax.features.mfcc_features import Mfcc
 
 
 class AbstractTransform(StringParsed, ABC):
@@ -145,6 +146,8 @@ class TransposeTransform(AbstractTransform):
                                  f"Valid feature are {self.valid_features()}")
 
     def inverse(self, obj: Union[CorpusEvent, FeatureValue], **kwargs) -> Union[CorpusEvent, FeatureValue]:
+        #print("in transforms inverse obj",obj)
+        #print("obj type",type(obj))
         if isinstance(obj, CorpusEvent):
             event: CorpusEvent = copy.deepcopy(obj)
             for (key, feature) in event.features.items():
@@ -155,11 +158,18 @@ class TransposeTransform(AbstractTransform):
             if isinstance(event, MidiCorpusEvent):
                 for note in event.notes:
                     note.pitch -= self.semitones
+            return event
         elif isinstance(obj, PitchTypes):
             pitch: int = obj.value() - self.semitones
             return obj.__class__(value=pitch)
         elif isinstance(obj, ChromaTypes):
             chroma: np.ndarray = np.roll(obj.value(), -(self.semitones % 12))
             return obj.__class__(value=chroma)
+
+
+        elif isinstance(obj, Mfcc):
+            # MFCCs are not affected by transposition, so we return them unchanged
+            print("MFCC inverse called, returning unchanged")
+            return obj.__class__(value=obj.value())
         raise TransformError(f"Could not apply inverse transform {type(self).__name__} to object {obj}. "
                              f"Valid feature are {self.valid_features()}")
