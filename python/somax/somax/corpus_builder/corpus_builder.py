@@ -30,6 +30,7 @@ from somax.runtime.target import SimpleOscTarget
 from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduling
 
 
+from somax.features.spectral_features import SpectralCentroid
 # experimental features
 from somax.features.speed_features import TempogramCoeffOnset, TempogramCoeffMean
 # from somax.features.latent_features import LatentSpaceEncoder
@@ -359,9 +360,13 @@ class CorpusBuilder:
             try:
                 print("analyzing feature", feature)
                 feature.analyze(events, metadata)
+                print("done")
                 used_features.append(feature)
+                #print(feature, "added to used_features" )                
             except FeatureError as e:
                 self.logger.debug(repr(e))
+        
+
 
         # experimental_features = [TempogramCoeffOnset, TempogramCoeffMean, LatentSpaceEncoder]
         experimental_features = [TempogramCoeffOnset, TempogramCoeffMean]

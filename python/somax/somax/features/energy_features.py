@@ -116,7 +116,7 @@ class VerticalDensity(AnalyzableFeature):
     def value(self) -> Any:
         return self._value
 
-class RMS(CorpusFeature):
+class RMS(AnalyzableFeature):
     def __init__(self, value: float):
         super().__init__(value=value)
 

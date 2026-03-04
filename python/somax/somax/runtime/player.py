@@ -119,7 +119,7 @@ class Player(Parametric, ContentAware):
                                                     self.corpus, taboo_mask, enforce_output)
 
             # Ajout Vmo
-            print("memory_vmo", self.memory_vmo_enabled.value)
+            #print("memory_vmo", self.memory_vmo_enabled.value)
             if self.vmo_player_enabled.value and self.vmo_player is not None and not self.memory_vmo_enabled.value:
                 event, transform, is_vmo_match = self.vmo_player.new_event()
                 event_and_transform = event, transform

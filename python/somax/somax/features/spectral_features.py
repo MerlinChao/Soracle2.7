@@ -44,21 +44,33 @@ class OctaveBands(AnalyzableFeature):
         return self._value
 
 
-class SpectralCentroid(CorpusFeature):
+class SpectralCentroid(AnalyzableFeature):
 
     def __init__(self, value: float):
         super().__init__(value=value)
 
     @classmethod
     def analyze(cls, events: List[CorpusEvent], metadata) -> List[CorpusEvent]:
+        
+        
+        #print("analyzing spectral centroid")
+        #print("metadata content type", metadata.content_type)
+        #print("metadata type", type(metadata))
+        #print("events type", type(events))
+        #print([isinstance(e, AudioCorpusEvent) for e in events])
+        #print(isinstance(metadata, AudioMetadata) )
+        
         if FeatureUtils.is_valid_midi(events, metadata):
-                events: List[MidiCorpusEvent]
-                metadata: MidiMetadata
-                cls._analyze_midi(events, metadata)
+            events: List[MidiCorpusEvent]
+            metadata: MidiMetadata
+            cls._analyze_midi(events, metadata)
+            return(events)
         elif FeatureUtils.is_valid_audio(events, metadata):
-                events: List[AudioCorpusEvent]
-                metadata: AudioMetadata
-                cls._analyze_audio(events, metadata)
+            print("it's valid audio")
+            events: List[AudioCorpusEvent]
+            metadata: AudioMetadata
+            cls._analyze_audio(events, metadata)
+            return(events)
         
         raise FeatureError(f"Feature '{cls.__name__}' does not support content of "
                            f"type {metadata.content_type.__class__.__name__}")
@@ -82,10 +94,16 @@ class SpectralCentroid(CorpusFeature):
     
     @classmethod
     def _analyze_audio(cls, events: List[AudioCorpusEvent], metadata: AudioMetadata) -> None:
-        spectralcentroid = librosa.feature.spectral_centroid(y=metadata.foreground_data, sr=metadata.sr, hop_length=metadata.hop_length,
+        
+        #print("backgroundata",metadata.background_data)
+        #print("sr", metadata.sr)
+        #print("hoplenght", metadata.hop_length)
+        
+        spectralcentroid = librosa.feature.spectral_centroid(y=metadata.background_data, sr=metadata.sr, hop_length=metadata.hop_length,
                                                             n_fft=2048)
-            
+        #print("for event in events")
         for event in events:
+                #print("event",event)
                 onset_frame: int = librosa.time_to_frames(event.onset, sr=metadata.sr, hop_length=metadata.hop_length)
                 end_frame: int = librosa.time_to_frames(event.onset + event.duration, sr=metadata.sr,
                                                     hop_length=metadata.hop_length)

@@ -68,17 +68,27 @@ class  VMOManager(Parametric):
         #print("quality_lrs",self.quality_lrs.value)
         #print("self.VMOs.items()",self.VMOs.items() )
         #print("features_used",self.features_used.value)
+        
+        #this is just for debugging
+        nb_of_candidates = []
+        
         for (feature,vmo), lrs_quality in zip(self.VMOs.items(),self.quality_lrs.value):
             #print("feature",feature)
             #print("vmo",vmo)
+            
+
+            
             if feature in self.features_used.value and vmo is not None:
                 #print("feature",feature)
                 candidates = self._get_candidates_from_VMO(vmo, window, feature,transpositions)
-                print("nb of candidates for features" , feature, ":", len(candidates))
+                #print("nb of candidates for features" , feature, ":", len(candidates))
+                nb_of_candidates.append((feature,len(candidates)))
+                
                 candidates = self.filter_with_lrs(candidates, lrs_quality)
                 candidates = self.normalize_and_weight(candidates,feature)
 
-                
+            
+            
                 #we merge the same candidates from different features with the same starting and destination index or time in case of multisegmentation
                 if self.multisegment:
                     for candidate in candidates:
@@ -110,7 +120,7 @@ class  VMOManager(Parametric):
                         else:
                             all_candidates[starts_destinations[key]].score += candidate.score
         
-
+        print(nb_of_candidates)
         return all_candidates
 
    
@@ -234,7 +244,9 @@ class  VMOManager(Parametric):
         if self.multisegment:
             return self.get_labels_multi_seg(event)
         labels = dict()
+        #print( "self.VMOs",self.VMOs)
         for feature in self.features_used.value:
+            #print("in get_labels", feature)
             if self.VMOs[feature] is not None:
                 labels[feature] = self.VMOs[feature].data[index]
         return labels

@@ -57,7 +57,7 @@ class TempogramCoeffOnset(AnalyzableFeature):
             tempogram_coeff = np.linalg.norm(onset_tempogram) / np.sqrt(len(onset_tempogram))
             # Or equivalently: tempogram_coeff = np.sqrt(np.mean(onset_tempogram**2))
             
-            print("setting feature", tempogram_coeff)
+            #print("setting feature", tempogram_coeff)
             event.set_feature(cls(value=tempogram_coeff))
 
 

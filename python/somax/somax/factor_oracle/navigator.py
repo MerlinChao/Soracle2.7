@@ -65,7 +65,7 @@ class Navigator(Parametric):
         print("navigator get_candidates window",window)
         transpositions = self.transpositions.value if self.enabled_transposition.value else None
         candidates = self.vmo_manager.get_candidates(window,transpositions)
-        print("nb candidates ", len(candidates))
+        #print("nb candidates ", len(candidates))
         
         # filter for taboo and region mask
         filtered_candidates = self._filter_candidates(candidates)

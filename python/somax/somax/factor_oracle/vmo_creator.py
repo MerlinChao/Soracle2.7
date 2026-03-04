@@ -9,7 +9,7 @@ from somax.runtime.corpus import Corpus
 from numpy import ndarray
 from typing import Optional
 from somax.features.feature import CorpusFeature
-from somax.features.latent_features import LatentSpaceEncoder
+# from somax.features.latent_features import LatentSpaceEncoder
 from vmo.VMO.oracle import FO, MO, find_threshold, build_oracle
 from typing import Tuple, List, Optional, Dict, Any, Type, Union
 from somax.features.feature import CorpusFeature, AbstractFeature
@@ -34,8 +34,8 @@ all_features = [
     OnsetChroma,
     Mfcc,
     RMS,
-    SpectralCentroid,
-    LatentSpaceEncoder,
+    SpectralCentroid
+    #LatentSpaceEncoder,
 ]
 
 
@@ -82,13 +82,14 @@ class VMOCreator(Parametric):
         # self.dict_of_list = self.create_dict_of_list()
 
         # For LatentSpaceEncoder feature
-        self.clusters_list = self.create_clusters_list()
+        # self.clusters_list = self.create_clusters_list()
 
     def create_vmos(self):
         VMOs = {}
         if self.corpus is None:
             return VMOs
         # "clustering_method", self.clustering_method.value)
+        print("all_features", all_features)
         for feature, threshold, nb_cluster in zip(
             all_features, self.thresholds.value, self.nb_clusters.value
         ):
@@ -96,18 +97,19 @@ class VMOCreator(Parametric):
             # print("  feature",feature)
             # print("  threshold",threshold)
             # print("  nb_cluster",nb_cluster)
+            print("self.corpus.feature_type", self.corpus.feature_types)
             if feature not in self.corpus.feature_types:
                 continue
-            if feature == LatentSpaceEncoder:
-                VMOs[feature] = self.create_FO_with_kmeans(feature, nb_cluster)
-            else:
-                if self.clustering_method.value == "kmeans":
+            # if feature == LatentSpaceEncoder:
+            #     VMOs[feature] = self.create_FO_with_kmeans(feature, nb_cluster)
+            # else:
+            if self.clustering_method.value == "kmeans":
                     VMOs[feature] = self.create_FO_with_kmeans(feature, nb_cluster)
-                elif self.clustering_method.value == "IR":
+            elif self.clustering_method.value == "IR":
                     VMOs[feature] = self._create_vmo_with_IR(feature, threshold)
-                elif self.clustering_method.value == "somax_labels":
+            elif self.clustering_method.value == "somax_labels":
                     VMOs[feature] = self.create_FO_with_somax_label(feature)
-                else:
+            else:
                     raise ValueError(
                         f"Unrecognized clustering method: {self.clustering_method.value}"
                     )
@@ -447,12 +449,12 @@ class VMOCreator(Parametric):
             return []
 
         clusters_list = []
-        print("self.VMOs", self.VMOs)
+        #print("self.VMOs", self.VMOs)
 
-        if LatentSpaceEncoder not in self.features_used.value:
-            return []
+        #if LatentSpaceEncoder not in self.features_used.value:
+        #    return []
 
-        vmo = self.VMOs[LatentSpaceEncoder]  # type: ignore
+        vmo = None #self.VMOs[LatentSpaceEncoder]  # type: ignore
         if vmo is None:
             clusters_list = None  # type: ignore
         else:

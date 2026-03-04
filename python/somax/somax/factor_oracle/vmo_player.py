@@ -138,10 +138,12 @@ class VMO_Player(Parametric):
         )
 
         # not used for now
-        self.vmo_classifier = VMO_classifier(
-            clusters_list=self.vmo_creator.clusters_list
-        )
-
+         # self.vmo_classifier = VMO_classifier(
+         #     dict_of_list=self.vmo_creator.
+         # )
+         # self.latent_classifier = LatentVMO_classifier(
+         #     clusters_list=self.vmo_creator.clusters_list
+         # )
         self.influence_handler = InfluenceHandler(
             corpus,
             features_used,
@@ -240,8 +242,9 @@ class VMO_Player(Parametric):
         self.candidate_selector.update(selected_candidate)
 
     def influence(self, influence: FeatureInfluence, time, *args, **kwargs):
-        print("all args in influence vmo player", time, args, kwargs)
+        print("all args in influence vmo player",influence,influence.feature,influence.feature._value, time, args, kwargs)
         self.influence_handler.influence(influence)
+        
         self.get_delta_time(time)
         # self.influence_fo.influence(influence, time, self.current_event)
         if self.navigator.need_to_change_next_jump(influence):
