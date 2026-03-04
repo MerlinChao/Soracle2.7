@@ -1,73 +1,73 @@
-# Somax 2
-Somax2 is an application for musical improvisation and composition using AI with machine listening, cognitive memory activation model, multi-agent architecture, full application interface to agent patching and control, and full Max library API. Somax2 is implemented in [Max](https://cycling74.com/products/max/) and Python and is based on a generative AI model to provide real-time machine improvisations coherent both with the internal selected corpus styles and with the unfolding external musical context. Somax2 handles both MIDI and audio input, corpus memory, and output. The model can be used with little configuration to let its agents autonomously interact with musicians (and one with another), but it also allows a variety of manual controls of its generative process and interaction strategies, effectively letting one use it as a fully flexible smart instrument.
+<div align="center">
+  <img src="media/logo.png" alt="ipt~ logo" width="300"/>
+</div>
 
-While the application can be used straight out of the box with little configuration (see [Getting Started](#Getting-started) below), it is also designed as a library, allowing the user to create custom models as well as set up networks of multiple models and sources that are listening to and interacting with each other.
+# ipt_tilde
 
-## Requirements
+ipt~ is a Max/MSP external object for real-time classification of instrumental playing techniques.
 
-* macOS 10.13 or later / Windows 10+
-* Max 8.6 or later / Max 9.0.3 or later
-* (Python 3.9 or later -- only needed for manual installation)
+This object loads and runs TorchScript (`.ts`) classification models, enabling low latency inference on CPU and MPS devices.
 
-## Installation
+This project is related to [nime2025](https://github.com/nbrochec/nime2025) repository, where you can find the code used in our paper *Introducing EG-IPT and ipt~: a novel electric guitar dataset and a new Max/MSP object for real-time classification of instrumental playing techniques* presented during [NIME 2025](http://nime2025.org/), and train a classification model for electric guitar playing techniques.
 
-### Easy Installation
+👉 Train your own playing techniques recognition model in following instructions from our [ipt_recognition](http://github.com/nbrochec/ipt_recognition) repository.
 
-This is the path recommended for most users, unless you explicitly want to modify the python code.
+### ⚙️ Requirements
 
-* Go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of Somax 2 (`Somax-v2_x_x.dmg`)
-* Copy the extracted `Somax2` folder  into the `Packages` folder in your Max folder (by default, this is `"~/Documents/Max 8/Packages"`)
-* You're done! Now, have a look at the [Getting Started](#getting-started) section below on where to go next
++ macOS 10.13 or later
++ Apple Silicon processor M1 or later (Note: this external doesn't work on Intel processors at the moment)
++ Max 8.6 or later / Max 9.0.3 or later
 
+### 💾 Installation
 
-### Manual Installation:
-If you want to modify the python code, you will need a manual installation. This assumes you already have python 3.9+ installed.
++ Go to [Releases](https://github.com/nbrochec/ipt_tilde/releases) and download the latest version of ipt~ (`ipt_tilde.dmg`)
++ Copy the extracted `ipt_tilde` folder into the Packages folder in your Max folder (by default, this is `~/Documents/Max 9/Packages`)
++ You're done!
+ 
+### 🎥 Demo Video
+A demonstration video of ipt~ detecting in real-time Instrumental Playing Techniques from the EG-IPT dataset is available [here](https://youtu.be/PFiWNnOd-vg).
 
-#### Step 1: Install Somax
+## 🧠 About
 
-* Clone the master branch of this [repository](https://github.com/DYCI2/Somax2) or go to [Releases](https://github.com/DYCI2/Somax2/releases) and download the latest version of the Somax source code.
-* Add the `max/somax` subfolder of Somax2 to your Max path through Options -> File Preferences in Max. Make sure that the `subfolders` option is checked.
+This project is part of an ongoing research effort into the real-time recognition of instrumental playing techniques for interactive music systems.
+If you use this work in your paper, please consider citing the following:
 
-#### Step 2: Install Python Requirements
+```bibtex
+@inproceedings{fiorini2025egipt,
+  title={Introducing EG-IPT and ipt~: a novel electric guitar dataset and a new Max/MSP object for real-time classification of instrumental playing techniques},
+  author={Fiorini, Marco and Brochec, Nicolas and Borg, Joakim and Pasini, Riccardo},
+  booktitle={NIME 2025},
+  year={2025},
+  address={Canberra, Australia}
+}
+```
 
-* In a terminal, cd to the `Somax2` root folder and install the requirements with `pip3 install -r python/somax/requirements.txt`
+## 📚 Related Work
 
-## Getting Started
-The main Somax application is the patch `somax2.maxpat`. You can open this patch from inside Max or directly from Finder.
+If you are interested in this topic, please check out our other papers:
+- [Brochec et al. (2025)](https://hal.science/hal-05061669) - "Interactive Music Co-Creation with an Instrumental Technique-Aware System: A Case Study with Flute and Somax2"
+- [Fiorini and Brochec (2024)](https://hal.science/hal-04635907) - "Guiding Co-Creative Musical Agents through Real-Time Flute Instrumental Playing Technique Recognition"
+- [Brochec et al. (2024)](https://hal.science/hal-04642673) - "Microphone-based Data Augmentation for Automatic Recognition of Instrumental Playing Techniques"
 
-The document `Somax2 User's Guide.pdf` gives an overview of how the somax2 interaction model works and presents the Somax2 objects and UI.
+## 💻 Build Instructions
 
-The `somax2.overview.maxpat` tutorial and help center is the starting point to begin exploring interactively the world of Somax2. From here you will be able to access all the different interactive tutorials, as well as to get access to ready-to-play patches defining specific performance strategies. Templates from one to four players are also available, as well as maxhelps for all the Somax2 objects.
+- In a terminal, run the following commands:
 
-**macOS: Note that the first time you launch Somax, depending on your security settings you may be presented with a number of dialogues asking you to give permission to a number of externals (shell, bonk, ircamdescriptor, bc.virfun and bc.yinstats) that Somax requires to be able to run. You may also be asked for permission the first time you launch the server (this step is explained in the tutorial). Accept each of those to proceed.**
+```bash
+git clone git@github.com:nbrochec/ipt_tilde.git --recurse-submodules
+cd ipt_tilde
+cmake -S . -B build DCMAKE_BUILD_TYPE=Release
+cmake --build build --target ipt_tilde -j 8 --verbose
+```
 
-## Documentation and Resources
+**Note:** The instructions above may trigger a CMake warning:  `static library kineto_LIBRARY-NOTFOUND not found.`  However, this does not appear to affect compilation or functionality.  Using the pre-compiled binaries from [PyTorch](https://pytorch.org/) will avoid this warning, but as of version 2.4.1, their CPU performance is approximately 20x slower compared to the Anaconda-provided binaries.
 
-* **Introduction to Somax:** The document `Somax2 User's Guide.pdf` is intended as a starting point to give an understanding of how the interaction model of Somax works.
-* **Max Help Files:** The main documentation of Somax. Individual help files exists for each Max object, outlining how to use the object, its parametric controls as well as a number of use cases. The help files can be accessed by pressing the «?» button available in each of the objects UI or by right-clicking (ctrl-click) the object inside Max in the unlocked patcher and selecting "Open Help".
-* **Videos, demos, Reports and Publications**: Can be found [in the Somax2 project page](http://repmus.ircam.fr/somax2).
-
-Because of space limitations, only a few tiny audio corpora (marked with a «(A)» in the corpus menu) are included in the distributions. Check the [Somax2 Project page](http://repmus.ircam.fr/somax2) for more corpora.
-
-## Credits
-
-Somax2 (c) Ircam 2012-2025
-
-Somax2 is a totally renewed version of the Somax reactive co-improvisation paradigm born in the Music Representations Team at Ircam - STMS.
-
-It is  part of the research projects ANR MERCI (Mixed Musical Reality with Creative Instruments) and ERC REACH (Raising Co-creativity in Cyber-Human Musicianship) directed by Gérard Assayag.
-
-Somax2 development, documentations and tutorials by Joakim Borg and Marco Fiorini.
-
-Somax created by Gérard Assayag and Laurent Bonnasse-Gahot, adaptations and pre-version 2 by Axel Chemla Romeu Santos, early prototype by Olivier Delerue.
-
-Thanks to Georges Bloch, Mikhaïl Malt for their continuous expertise.
-
-Thanks to Bernard Borron, Bernard Magnien, Carine Bonnefoy, Joëlle Léandre, Fabrizio Cassol, Marco Fiorini, Anaïs del Sordo for their musical material used in Somax2 distribution corpus.
+- Copy the produced `.mxo` external inside `~/Documents/Max 9/Packages/ipt_tilde/externals/`
 
 
-## Contacting the team
+## 📜 License and Fundings
 
-See [Project Page](http://repmus.ircam.fr/somax2).
-# Soracle2.7
-# Soracle2.7
+This project is released under a CC-BY-NC-4.0 license.
+
+This research is supported by the European Research Council (ERC) as part of the [Raising Co-creativity in Cyber-Human Musicianship (REACH) Project](https://reach.ircam.fr) directed by Gérard Assayag, under the European Union's Horizon 2020 research and innovation program (GA \#883313). 
+Funding support for this work was provided by a Japanese Ministry of Education, Culture, Sports, Science and Technology (MEXT) scholarship to Nicolas Brochec. 

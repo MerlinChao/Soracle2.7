@@ -1,0 +1,110 @@
+# This file created by conda-build 3.28.4
+# meta.yaml template originally from:
+# /Users/runner/work/pytorch/pytorch/builder/conda/pytorch-nightly, last modified Tue Aug 27 19:56:47 2024
+# ------------------------------------------------
+
+package:
+  name: pytorch
+  version: 2.4.1
+source:
+  path: /Users/runner/work/pytorch/pytorch/pytorch
+build:
+  detect_binary_files_with_prefix: false
+  number: '0'
+  script_env:
+    - BUILD_SPLIT_CUDA
+    - BUILD_TEST
+    - CMAKE_ARGS
+    - CMAKE_OSX_ARCHITECTURES
+    - CONDA_CUDATOOLKIT_CONSTRAINT
+    - CONDA_TRITON_CONSTRAINT
+    - CUDA_VERSION
+    - CUDNN_VERSION
+    - DEBUG
+    - DEVELOPER_DIR
+    - EXTRA_CAFFE2_CMAKE_FLAGS
+    - MAX_JOBS
+    - OVERRIDE_TORCH_CUDA_ARCH_LIST
+    - USE_COREML_DELEGATE
+    - USE_CUDA
+    - USE_DISTRIBUTED
+    - USE_FBGEMM
+    - USE_GLOO_WITH_OPENSSL
+    - USE_MKLDNN
+    - USE_NNPACK
+    - USE_PYTORCH_METAL_EXPORT
+    - USE_QNNPACK
+    - _GLIBCXX_USE_CXX11_ABI
+  string: py3.12_0
+requirements:
+  build:
+    - bzip2 1.0.8 h80987f9_6
+    - c-ares 1.19.1 h80987f9_0
+    - ca-certificates 2024.7.2 hca03da5_0
+    - cmake 3.26.4 h5d7ac33_0
+    - expat 2.6.2 h313beb8_0
+    - krb5 1.20.1 hf3e1bf2_1
+    - libcurl 8.7.1 h3e2b118_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libedit 3.1.20230828 h80987f9_0
+    - libev 4.33 h1a28f6b_1
+    - libiconv 1.16 h80987f9_3
+    - libnghttp2 1.57.0 h62f6fdd_0
+    - libssh2 1.11.0 h3e2b118_0
+    - libuv 1.48.0 h80987f9_0
+    - lz4-c 1.9.4 h313beb8_1
+    - ncurses 6.4 h313beb8_0
+    - openssl 3.0.14 h80987f9_0
+    - pkg-config 0.29.2 h1a28f6b_0
+    - rhash 1.4.3 h02f6b3c_0
+    - xz 5.4.6 h80987f9_1
+    - zlib 1.2.13 h18a0788_1
+    - zstd 1.5.5 hd90d995_2
+  host:
+    - bzip2 1.0.8 h80987f9_6
+    - ca-certificates 2024.7.2 hca03da5_0
+    - expat 2.6.2 h313beb8_0
+    - libcxx 14.0.6 h848a8c0_0
+    - libffi 3.4.4 hca03da5_1
+    - ncurses 6.4 h313beb8_0
+    - ninja 1.10.2 hca03da5_5
+    - ninja-base 1.10.2 h525c30c_5
+    - numpy 2.0.0rc1 py312ha09e789_1
+    - openssl 3.0.14 h80987f9_0
+    - pip 24.2 py312hca03da5_0
+    - python 3.12.4 h99e199e_1
+    - pyyaml 6.0.1 py312h80987f9_0
+    - readline 8.2 h1a28f6b_0
+    - setuptools 72.1.0 py312hca03da5_0
+    - sqlite 3.45.3 h80987f9_0
+    - tk 8.6.14 h6ba3021_0
+    - typing_extensions 4.11.0 py312hca03da5_0
+    - tzdata 2024a h04d1e81_0
+    - wheel 0.43.0 py312hca03da5_0
+    - xz 5.4.6 h80987f9_1
+    - yaml 0.2.5 h1a28f6b_0
+    - zlib 1.2.13 h18a0788_1
+  run:
+    - filelock
+    - jinja2
+    - llvm-openmp <16
+    - networkx
+    - python >=3.12,<3.13.0a0
+    - pyyaml
+    - sympy
+    - typing_extensions
+  run_constrained:
+    - cpuonly
+test:
+  imports:
+    - torch
+about:
+  home: http://pytorch.org/
+  license: BSD 3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: PyTorch is an optimized tensor library for deep learning using GPUs and
+    CPUs.
+extra:
+  copy_test_source_files: true
+  final: true

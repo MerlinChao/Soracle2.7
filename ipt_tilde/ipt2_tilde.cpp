@@ -1,0 +1,438 @@
+#include "c74_min.h"
+#include <torch/script.h>
+#include <chrono>
+
+#include "ipt_classifier.h"
+#include "leaky_integrator.h"
+#include "utility.h"
+
+using namespace c74::min;
+
+struct Docs {
+    static const inline title VERBOSE_TITLE = "Verbose";
+    static const inline title ENABLED_TITLE = "Enabled";
+    static const inline title SENSITIVITY_TITLE = "Sensitivity";
+    static const inline title SENSITIVITY_RANGE_TITLE = "Sensitivity Range";
+    static const inline title THRESHOLD_TITLE = "Threshold";
+    static const inline title WINDOW_TITLE = "Window";
+
+    static const inline description VERBOSE_DESCRIPTION = "Enable or disable verbose logging."
+                                                          " When set to @verbose @1, the object provides detailed"
+                                                          " logging to the Max console, useful for debugging.";
+
+    static const inline description ENABLED_DESCRIPTION = "Enable or disable classification model operation."
+                                                            " When set to @enabled @1, the model is operating."
+                                                            " When set to @enabled @0, the model is disabled.";
+    static const inline description SENSITIVITY_DESCRIPTION = "Adjust the sensitivity of classification output."
+                                                            " Use a @float between @0. and @1. A higher sensitivity allows"
+                                                            " quicker reactions to changes in audio input, while lower"
+                                                            " sensitivity smooths the output.";   
+    static const inline description SENSITIVITY_RANGE_DESCRIPTION = "Set the time window for sensitivity scaling."
+                                                            " Use a @float between @0. and @2000. Control the duration"
+                                                            " in milliseconds of the temporal window over which"
+                                                            " the model's confidence is smoothed.";
+    static const inline description THRESHOLD_DESCRIPTION = "Set the energy threshold for classification."
+                                                            " Use a @float between @-70 and @0. Controls the minimum energy"
+                                                            " level in dB required for a signal to be considered for"
+                                                            " classification. Adjust to ignore background noise or quiet input.";
+    static const inline description WINDOW_DESCRIPTION = "Set the sliding window size for energy thresholding."
+                                                            " Specifies the time window with a @float, in milliseconds,"
+                                                            " over which the energy threshold is applied. Larger" 
+                                                            " windows smooth the thresholding response.";
+    static const inline description CLASS_NAMES_DESCRIPTION = "Message to retrieve the list of class names from the model."
+                                                            " Outputs the class names associated with the loaded model"
+                                                            " via the dumpout outlet.";
+};
+
+
+class ipt2_tilde : public object<ipt2_tilde>, public vector_operator<> {
+private:
+    std::unique_ptr<IptClassifier> m_classifier;
+
+    std::thread m_processing_thread;
+    c74::min::fifo<double> m_audio_fifo{16384};
+    c74::min::fifo<ClassificationResult> m_event_fifo{100};
+
+
+    std::atomic<bool> m_running = false; // lifetime control of internal classification thread
+    std::atomic<bool> m_enabled = true;  // user-controlled flag to manually disable output
+
+    // flag indicating whether m_classifier's `initialize_model()` has been called (independently of success)
+    std::atomic<bool> m_model_initialized = false;
+
+    LeakyIntegrator m_integrator;
+
+    std::optional<std::vector<std::string>> m_class_names;
+
+public:
+    MIN_DESCRIPTION{"Real-time Instrumental Playing Technique (IPT) recognition using a pre-trained classification model."};
+    MIN_TAGS{""}; // TODO
+    MIN_AUTHOR{"Nicolas Brochec, Joakim Borg, Marco Fiorini"};
+    MIN_RELATED{""};  // TODO
+
+    inlet<> inlet_main{this, "(signal) audio input", ""};
+
+    outlet<> outlet_main{this, "(int) recognized class index", "Outputs the index of the class with higher detection probability."};
+    outlet<> outlet_classname{this, "(symbol) recognized class name", "Outputs the name of selected class with higher detection probability."};
+    outlet<> outlet_distribution{this, "(list) class probability distribution", "Outputs the class probability distribution as a list."};
+    outlet<> dumpout{this, "(any) dumpout", "Outputs miscellaneous data like latency and class names."};
+
+    argument<symbol> model_path_arg {this, "model", "Filepath to the TorchScript model to load. This argument is required. Use absolute path for your model or add your model to the Max file preferences list." };
+    argument<symbol> device_arg {this, "device", "Device to use for inference: 'CPU', 'CUDA', or 'MPS'. Optional, defaults to 'CPU'." };
+
+    explicit ipt2_tilde(const atoms& args = {}) { 
+        try {
+            auto model_path = parse_model_path(args);
+            auto device_type = parse_device_type(args);
+            m_classifier = std::make_unique<IptClassifier>(model_path, device_type);
+            cout << "ipt2: constructor initialized with model: " << model_path << endl;
+        } catch (std::runtime_error& e) {
+            cout << "ipt2: CONSTRUCTOR ERROR: " << e.what() << endl;
+            error(e.what());
+        }
+
+        // Note: Object construction is finalized in `setup` message
+    }
+
+
+    ~ipt2_tilde() override {
+        if (m_processing_thread.joinable()) {
+            m_running = false;
+            m_processing_thread.join();
+        }
+    }
+    
+    // BOOT STAMP
+    message<> maxclass_setup{
+        this, "maxclass_setup",
+        [this](const c74::min::atoms &args, const int inlet) -> c74::min::atoms {
+            cout << " ipt2~ v1.0.0 (2025) "
+                << " by Nicolas Brochec, Joakim Borg, Marco Fiorini" << endl;
+            cout << " Tokyo University of the Arts, IRCAM, ERC REACH" << endl;
+            return {};
+        }
+    };
+
+
+    timer<> deliverer{
+            this, MIN_FUNCTION {
+                ClassificationResult result;
+                while (m_event_fifo.try_dequeue(result)) {
+                    // If there are events in the event fifo, it means that the main loop is running and
+                    // that the model therefore is initialized, so these assertions should never be hit
+                    assert(m_model_initialized);
+                    assert(m_classifier);
+
+                    if (!m_class_names) {
+                        m_class_names = *m_classifier->get_class_names();
+                    }
+
+
+                    auto distribution = m_integrator.process(result.distribution);
+
+                    atoms distribution_atms;
+
+                    for (const auto& v: distribution) {
+                        distribution_atms.emplace_back(v);
+                    }
+
+                    auto index = static_cast<long>(util::argmax(distribution));
+
+                    outlet_main.send(index);
+                    outlet_classname.send(m_class_names->at(static_cast<std::size_t>(index)));
+                    outlet_distribution.send(distribution_atms);
+
+                    atoms latency{"latency"};
+                    latency.emplace_back(result.inference_latency_ms);
+                    dumpout.send(latency);
+                }
+                return {};
+            }
+    };
+
+
+    void operator()(audio_bundle in, audio_bundle) override {
+        if (in.channel_count() > 0 && m_running && m_enabled) {
+            for (auto i = 0; i < in.frame_count(); ++i) {
+                m_audio_fifo.try_enqueue(in.samples(0)[i]);
+            }
+        }
+    }
+
+
+    attribute<bool> verbose{this, "verbose", false, Docs::VERBOSE_TITLE, Docs::VERBOSE_DESCRIPTION};
+
+
+    attribute<bool> enabled{this, "enabled", true, Docs::ENABLED_TITLE, Docs::ENABLED_DESCRIPTION, setter{
+            MIN_FUNCTION {
+                if (args[0].type() == c74::min::message_type::int_argument) {
+                    m_enabled = static_cast<bool>(args[0]);
+                    return args;
+                }
+
+                cerr << "bad argument for message \"enabled\"" << endl;
+                return enabled;
+            }
+    }
+    };
+
+
+    attribute<double> sensitivity{this, "sensitivity", 1.0, Docs::SENSITIVITY_TITLE, Docs::SENSITIVITY_DESCRIPTION, setter{
+            MIN_FUNCTION {
+                if (args.size() == 1 && args[0].type() == c74::min::message_type::float_argument) {
+                    auto tau = std::min(1.0, std::max(0.0, static_cast<double>(args[0])));
+                    m_integrator.set_tau((1.0 - tau) * static_cast<double>(sensitivityrange.get()));
+                    return {tau};
+                }
+
+                cerr << "bad argument for message \"sensitivity\"" << endl;
+                return sensitivity;
+            }
+    }
+    };
+
+
+    attribute<int> sensitivityrange{this, "sensitivityrange", 2000, Docs::SENSITIVITY_RANGE_TITLE, Docs::SENSITIVITY_RANGE_DESCRIPTION, setter{
+        MIN_FUNCTION {
+            if (args.size() == 1
+                && args[0].type() == c74::min::message_type::int_argument
+                && static_cast<int>(args[0]) > 0) {
+                
+                // Retrieve the current sensitivity value
+                double current_sensitivity = sensitivity.get();
+
+                // Ensure sensitivity is within bounds
+                current_sensitivity = std::clamp(current_sensitivity, 0.0, 1.0);
+
+                // Update the tau value
+                double new_tau = (1.0 - current_sensitivity) * static_cast<double>(args[0]);
+                new_tau = std::max(new_tau, 1e-6);  // Avoid zero or negative tau
+                m_integrator.set_tau(new_tau);
+
+                // Return the updated sensitivityrange value
+                return args;
+            }
+
+            cerr << "bad argument for message \"sensitivityrange\"" << endl;
+            return sensitivityrange;
+        }
+    }};
+
+
+    attribute<double> threshold{this, "threshold", EnergyThreshold::MINIMUM_THRESHOLD, Docs::THRESHOLD_TITLE, Docs::THRESHOLD_DESCRIPTION, setter{
+            MIN_FUNCTION {
+                if (args.size() == 1 && (args[0].type() == c74::min::message_type::float_argument
+                                         || args[0].type() == c74::min::message_type::int_argument)) {
+                    // Note: ignored on first call, as m_classifier is not yet initialized.
+                    //       In this case, it will be passed through the `setup` message instead
+                    if (m_classifier) {
+                        m_classifier->set_energy_threshold(static_cast<float>(args[0]));
+                    }
+
+                    return args;
+                }
+
+                cerr << "bad argument for message \"threshold\"" << endl;
+                return threshold;
+            }
+    }
+    };
+
+
+    attribute<int> window{this, "window", IptClassifier::DEFAULT_THRESHOLD_WINDOW_MS, Docs::WINDOW_TITLE, Docs::WINDOW_DESCRIPTION, setter{
+            MIN_FUNCTION {
+                if (args.size() == 1 && (args[0].type() == c74::min::message_type::int_argument
+                                         || args[0].type() == c74::min::message_type::float_argument)) {
+                    // Note: ignored on first call, as m_classifier is not yet initialized.
+                    //       In this case, it will be passed through the `setup` message instead
+                    if (m_classifier) {
+                        m_classifier->set_threshold_window(static_cast<int>(args[0]));
+                    }
+
+                    return args;
+                }
+
+                cerr << "bad argument for message \"threshold\"" << endl;
+                return threshold;
+            }
+    }
+    };
+
+    message<> classnames{this, "classnames", Docs::CLASS_NAMES_DESCRIPTION, setter{MIN_FUNCTION {
+        if (inlet != 0) {
+            cerr << "invalid message \"classnames\" for inlet " << inlet << endl;
+            return {};
+        }
+
+        if (!args.empty()) {
+            cwarn << "extra argument for message \"classnames\"" << endl;
+        }
+
+        if (!m_running) {
+            cerr << "cannot get classnames: no model has been loaded" << endl;
+            return {};
+        }
+
+        // If model has been successfully initialize, we can be sure that the model has valid class names
+        if (!m_class_names) {
+            m_class_names = *m_classifier->get_class_names();
+        }
+
+        atoms names{"classnames"};
+        for (const auto& n: *m_class_names) {
+            names.emplace_back(n);
+        }
+
+        dumpout.send(names);
+
+        return {};
+    }}};
+
+
+    // Note: Special function called internally by the min-api after the constructor and all attributes
+    // have been initialized. This function cannot be called directly by a user
+    message<> setup{this, "setup", MIN_FUNCTION {
+        m_classifier->set_energy_threshold(threshold.get());
+        m_classifier->set_threshold_window(window.get());
+
+        // since m_classifier is initialized in ctor, we can be sure that it's fully initialized when thread is launched
+        m_processing_thread = std::thread(&ipt2_tilde::main_loop, this);
+        return {};
+    }};
+
+
+    // Note: Special function called internally when audio is enabled. This function cannot be called directly by user.
+    //       Also note that this function is called on the main thread, not the audio thread.
+    message<> dspsetup{this, "dspsetup", MIN_FUNCTION {
+        int sample_rate = args[0];
+        int vector_length = args[1];
+
+        // In the rare case of thread initialization not being done by the time dsp is enabled, wait until init finishes
+        while (!m_model_initialized) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        }
+
+        // If model initialization was successful: initialize buffers
+        if (m_running) {
+            m_classifier->initialize_buffers(sample_rate, vector_length);
+        }
+
+        return {};
+    }};
+
+
+private:
+    void main_loop() {
+        try {
+            if (verbose.get()) {
+                cout << "ipt2: attempting to initialize model..." << endl;
+            }
+            m_classifier->initialize_model();
+            m_class_names = m_classifier->get_class_names();
+            m_running = true;
+            if (verbose.get()) {
+                cout << "ipt2: model initialized successfully" << endl;
+            }
+        } catch (const std::exception& e) {
+            cout << "ipt2: error during loading: " << e.what() << endl;
+        } catch (...) {
+            cout << "ipt2: unknown error during loading" << endl;
+        }
+
+        m_model_initialized = true; // true independently of success
+
+        try {
+            while (m_running) {
+                if (m_enabled) {
+                    std::vector<double> buffered_audio;
+                    double sample;
+                    while (m_audio_fifo.try_dequeue(sample)) {
+                        buffered_audio.push_back(sample);
+                    }
+
+                    if (!buffered_audio.empty()) {
+                        auto result = m_classifier->process(std::move(buffered_audio));
+                        if (result) {
+                            m_event_fifo.try_enqueue(*result);
+                            deliverer.delay(0.0);
+                        }
+                    }
+                }
+
+                std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            }
+
+        } catch (const std::exception& e) {
+            if (verbose.get()) {
+                cerr << e.what() << endl;
+            } else {
+                cerr << "model architecture is not compatible" << endl;
+            }
+        } catch (...) {
+            cerr << "unknown error" << endl;
+        }
+
+    }
+
+
+    static std::string parse_model_path(const atoms& args) {
+        if (args.empty()) {
+            throw std::runtime_error("Missing argument: filepath to model");
+        }
+
+        if (args[0].type() != c74::min::message_type::symbol_argument) {
+            throw std::runtime_error("first argument must be a filepath");
+        }
+
+        auto path = std::string(args[0]);
+
+        if (path.size() >= 3 && path.substr(path.length() - 3) != ".ts") {
+            path = path + ".ts";
+        }
+
+        // If relative path, look for file in max filepath and throws std::runtime_error if fails it to locate it
+        path = static_cast<std::string>(c74::min::path(path));
+
+        return path;
+    }
+
+
+    torch::DeviceType parse_device_type(const atoms& args) {
+        if (args.size() < 2) {
+            return torch::kCPU;
+        }
+
+        if (args[1].type() == c74::min::message_type::symbol_argument) {
+            auto device_str = std::string(args[1]);
+            std::transform(device_str.begin(), device_str.end(), device_str.begin(), [](unsigned char c) {
+                return std::toupper(c);
+            });
+
+            if (device_str == "CPU") {
+                return torch::kCPU;
+            } else if (device_str == "CUDA") {
+                return torch::kCUDA;
+            } else if (device_str == "MPS") {
+                return torch::kMPS;
+            } else {
+                cwarn << "unknown device type \"" << device_str << "\", defaulting to CPU" << endl;
+                return torch::kCPU;
+            }
+        } else if (args[1].type() == c74::min::message_type::int_argument) {
+            auto device_idx = static_cast<int>(args[1]);
+
+            if (device_idx < 0 || device_idx >= static_cast<int>(torch::DeviceType::COMPILE_TIME_MAX_DEVICE_TYPES)) {
+                cwarn << "unknown device type \"" << device_idx << "\", defaulting to CPU" << endl;
+                return torch::kCPU;
+            }
+
+            return static_cast<torch::DeviceType>(device_idx);
+        }
+
+        cwarn << "bad argument for message \"model\", defaulting to CPU << endl";
+        return torch::kCPU;
+    }
+};
+
+
+MIN_EXTERNAL(ipt2_tilde);

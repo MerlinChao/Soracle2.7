@@ -1,0 +1,25 @@
+{
+  "arch": "arm64",
+  "build": "py3.12_0",
+  "build_number": 0,
+  "constrains": [
+    "cpuonly"
+  ],
+  "depends": [
+    "filelock",
+    "jinja2",
+    "llvm-openmp <16",
+    "networkx",
+    "python >=3.12,<3.13.0a0",
+    "pyyaml",
+    "sympy",
+    "typing_extensions"
+  ],
+  "license": "BSD 3-Clause",
+  "license_family": "BSD",
+  "name": "pytorch",
+  "platform": "osx",
+  "subdir": "osx-arm64",
+  "timestamp": 1724792410703,
+  "version": "2.4.1"
+}
