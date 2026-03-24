@@ -121,7 +121,7 @@ class Player(Parametric, ContentAware):
             # Ajout Vmo
             #print("memory_vmo", self.memory_vmo_enabled.value)
             if self.vmo_player_enabled.value and self.vmo_player is not None and not self.memory_vmo_enabled.value:
-                event, transform, is_vmo_match = self.vmo_player.new_event()
+                event, transform, is_vmo_match = self.vmo_player.new_event(scheduler_time)
                 event_and_transform = event, transform
             else:
                 event_and_transform: Optional[Tuple[CorpusEvent, AbstractTransform]]

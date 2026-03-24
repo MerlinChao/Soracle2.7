@@ -37,6 +37,7 @@ from somax.features.pitch_features import YinDiscretePitch, TopNote, RuntimeInte
 from somax.features.chroma_features import OnsetChroma
 from somax.features.mfcc_features import Mfcc
 from somax.features.energy_features import TotalEnergyDb, RMS
+from somax.features.speed_features import TempogramCoeffOnset
 from somax.features.spectral_features import SpectralCentroid
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.corpus import Corpus
@@ -100,6 +101,7 @@ class VMO_Player(Parametric):
         temperature: float = 1,
         dot_folder: Optional[str] = None,
         use_peaks: bool = False,
+        delta_times: list[float] = [],
     ):
 
         super().__init__()
@@ -161,20 +163,22 @@ class VMO_Player(Parametric):
 
         self.last_onset_time = 0.0
         self.current_delta_time = 0.0
+        self.current_speed = 0
+        self.last_speeds = []
 
         self.set_corpus(
             corpus
         )  # maybe this shouldn't be here but otherwise the Vmos are not created correctly
 
-    def new_event(self):
+    def new_event(self,time):
 
         # print("corpus in vmo_player",self.corpus)
         if self.next_jump is None:
-            self.next_jump: Candidate = self.get_next_jump()
+            self.next_jump: Candidate = self.get_next_jump(time)
 
         if self.navigator.position_event > self.next_jump.starting_index:
             # that shouldn't happen, but sometimes it does in multisegmentation
-            self.next_jump = self.get_next_jump()
+            self.next_jump = self.get_next_jump(time)
 
         print("vmo_player position_event", self.navigator.position_event)
         print("vmo_player next_jump", self.next_jump.starting_index)
@@ -197,7 +201,7 @@ class VMO_Player(Parametric):
 
         return event, transform, self.is_matched
 
-    def get_next_jump(self) -> Candidate:
+    def get_next_jump(self, time) -> Candidate:
 
         candidates = self.navigator.get_candidates()
 
@@ -211,6 +215,18 @@ class VMO_Player(Parametric):
             print("vmo_player fallback activated")
         else:
             self.is_matched = True
+        
+        self.get_current_speed(time)
+        
+        if self.current_speed < 1:
+
+            for candidate in filtered_candidates:
+                #get a new weight distibution for candidates based on the tempogram coeff feature
+                if TempogramCoeffOnset in candidate.labels.keys():
+                    tempogram_coeff = candidate.labels[TempogramCoeffOnset].value
+                    #print("tempogram_coeff", tempogram_coeff)
+                    # we can use the tempogram coeff to adjust the score of the candidate, for example by multiplying it with the score
+                    candidate.score *= tempogram_coeff
 
         selected_candidate: Candidate = self.candidate_selector.select_candidate(
             filtered_candidates
@@ -248,7 +264,7 @@ class VMO_Player(Parametric):
         self.get_delta_time(time)
         # self.influence_fo.influence(influence, time, self.current_event)
         if self.navigator.need_to_change_next_jump(influence):
-            self.next_jump = self.get_next_jump()
+            self.next_jump = self.get_next_jump(time)
             # self.update_when_need_new_jump()
 
     def get_delta_time(self, time):
@@ -256,6 +272,14 @@ class VMO_Player(Parametric):
         self.last_onset_time = time
         self.current_delta_time = current_delta_time
         return current_delta_time
+
+    def get_current_speed(self, time):
+        delta_time = self.get_delta_time(time)
+        self.last_speeds.append(delta_time)
+        if len(self.last_speeds) > 5:
+            self.last_speeds.pop(0)
+        self.current_speed = np.mean(self.last_speeds)
+
 
     # pour memory + vmo
     def get_peaks(self, atom_name: str) -> Peaks:
