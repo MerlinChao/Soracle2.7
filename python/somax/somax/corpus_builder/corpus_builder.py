@@ -33,7 +33,7 @@ from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduli
 from somax.features.spectral_features import SpectralCentroid
 # experimental features
 from somax.features.speed_features import TempogramCoeffOnset, TempogramCoeffMean
-# from somax.features.latent_features import LatentSpaceEncoder
+from somax.features.latent_features import LatentSpaceEncoder
 
 
 class AudioSegmentation(Enum):
@@ -368,8 +368,8 @@ class CorpusBuilder:
         
 
 
-        # experimental_features = [TempogramCoeffOnset, TempogramCoeffMean, LatentSpaceEncoder]
-        experimental_features = [TempogramCoeffOnset, TempogramCoeffMean]
+        experimental_features = [TempogramCoeffOnset, TempogramCoeffMean, LatentSpaceEncoder]
+        #experimental_features = [TempogramCoeffOnset, TempogramCoeffMean]
         for feature in experimental_features:
             try:
                 print("analyzing experimental feature", feature)

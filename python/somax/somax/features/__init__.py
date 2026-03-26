@@ -7,3 +7,4 @@ from .spectral_features import OctaveBands, SpectralCentroid
 from .temporal_features import Tempo, BeatPhase
 from .mfcc_features import Mfcc, RuntimeMfcc
 from .speed_features import TempogramCoeffOnset, TempogramCoeffMean
+from .latent_features import LatentSpaceEncoder

@@ -40,7 +40,7 @@ from somax.features.energy_features import TotalEnergyDb, RMS
 from somax.features.spectral_features import SpectralCentroid
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.corpus import Corpus
-
+from somax.features.latent_features import LatentSpaceEncoder
 
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
 from somax.runtime.region_mask import RegionMask
@@ -65,6 +65,8 @@ from somax.factor_oracle.vmo_visualiser import VMOVisualizer
 from somax.factor_oracle.vmo_creator import VMOCreator
 from somax.factor_oracle.influence_vmo import InfluenceFO
 from somax.factor_oracle.peak_merger import PeakMerger
+
+import sklearn.metrics.pairwise as pw
 
 """
 list_fallback_mode  = ["matching", "coherent"]
@@ -161,12 +163,53 @@ class VMO_Player(Parametric):
 
         self.last_onset_time = 0.0
         self.current_delta_time = 0.0
+        
+        self.current_latent = np.zeros((2048,))  # TODO: find a better way to initialize the current latent vector
 
         self.set_corpus(
             corpus
         )  # maybe this shouldn't be here but otherwise the Vmos are not created correctly
 
+    
+    
+    def latent_candidate(self):
+        max_similarity = -100000
+        candidat = None
+        for slice in self.corpus.events:
+            #print("slice state index", slice.state_index)
+            #slice : CorpusEvent
+            embeding = slice.features[LatentSpaceEncoder]._value
+            # print("embeding", embeding)
+            # print("embeding shape", embeding.shape)
+            # print("current_latent ", self.current_latent)
+            # print("current_latent shape", self.current_latent.shape)
+            # print("cosine_similarity", pw.cosine_similarity([embeding], [self.current_latent]))
+            
+            similarity = pw.cosine_similarity([embeding], [self.current_latent])[0][0]
+            if similarity > max_similarity :
+                max_similarity = similarity
+                #TODO check for slice.state_index if the +1 is correct
+                candidat = Candidate( self.navigator.position_event, slice.state_index + 1, slice,NoTransform(),
+                                     lrs=  0, labels = None, segmentation_feature = self.navigator.segmentation_feature)
+        #print("max_similarity", max_similarity)
+        return candidat   
+    
+    
     def new_event(self):
+        #print("new event")
+        if self.current_latent is None:
+            next_step : Candidate = self.navigator.next_step()
+            event = next_step.event
+            print("no latent, next step event", event.state_index)
+            self.update_after_step(next_step)
+            return event, NoTransform(), True
+        else:
+            candidat = self.latent_candidate()
+            event = candidat.event
+            print("new jump", event.state_index)
+            self.update_after_step(candidat)
+            self.current_latent = None
+            return event, NoTransform(), True
 
         # print("corpus in vmo_player",self.corpus)
         if self.next_jump is None:
@@ -242,13 +285,22 @@ class VMO_Player(Parametric):
         self.candidate_selector.update(selected_candidate)
 
     def influence(self, influence: FeatureInfluence, time, *args, **kwargs):
-        print("all args in influence vmo player",influence,influence.feature,influence.feature._value, time, args, kwargs)
+        #print("all args in influence vmo player",influence,influence.feature,influence.feature._value, time, args, kwargs)
         self.influence_handler.influence(influence)
+        
+        if isinstance(influence.feature, LatentSpaceEncoder):
+            self.current_latent = influence.feature._value
+            #print("new latent incoming")
+            #print(type(self.current_latent))
+            #print(self.current_latent.shape)
         
         self.get_delta_time(time)
         # self.influence_fo.influence(influence, time, self.current_event)
-        if self.navigator.need_to_change_next_jump(influence):
-            self.next_jump = self.get_next_jump()
+        
+        #TODO rethink that
+        #if self.navigator.need_to_change_next_jump(influence):
+        #    self.next_jump = self.get_next_jump()
+            
             # self.update_when_need_new_jump()
 
     def get_delta_time(self, time):

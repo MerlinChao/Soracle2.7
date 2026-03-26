@@ -11,7 +11,7 @@ from somax.features import (YinDiscretePitch, OnsetChroma, MeanChroma, TopNote, 
                             RuntimeChroma, Tempo, BeatPhase)
 from somax.features.feature import CorpusFeature, AbstractFeature
 from somax.features.mfcc_features import Mfcc, RuntimeMfcc
-
+from somax.features.latent_features import LatentSpaceEncoder
 
 class FeatureKeywordFlags(Enum):
     ALIAS = 1  # keyword is an alias for a feature with another name (e.g. "pitch" alias for "topnote")
@@ -202,6 +202,12 @@ class FeatureDictionary:
                                                 influence_feature=RuntimeMfcc,
                                                 flags=[FeatureKeywordFlags.MAIN_KEYWORD],
                                                 default_classifier=OmaxMfccClassifier),
+
+        "latent": FeatureSpecification.audio_only(audio_feature=LatentSpaceEncoder,
+                                           influence_feature=LatentSpaceEncoder,
+                                           flags=[FeatureKeywordFlags.MAIN_KEYWORD],
+                                           default_classifier=None),
+
 
         "tempo": FeatureSpecification.singular(feature=Tempo,
                                                flags=[FeatureKeywordFlags.HIDDEN],

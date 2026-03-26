@@ -26,7 +26,7 @@ import torchaudio
 import torchaudio.functional as AF
 import torchaudio.transforms as AT
 from torch.utils.data import DataLoader, Dataset
-import pytorch_lightning as pl
+#import pytorch_lightning as pl
 
 
 # torchaudio.set_audio_backend("sox_io")  Deprecated

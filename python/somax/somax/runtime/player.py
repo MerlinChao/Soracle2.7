@@ -28,8 +28,7 @@ from somax.runtime.taboo_mask import TabooMask
 from somax.runtime.transform_handler import TransformHandler
 from somax.runtime.transforms import AbstractTransform, NoTransform
 from somax.runtime.parameter import Parametric, Parameter, ParamWithSetter
-
-
+from somax.features.latent_features import LatentSpaceEncoder
 from somax.factor_oracle.vmo_player import VMO_Player
 
 
@@ -219,7 +218,13 @@ class Player(Parametric, ContentAware):
 
         if not path:
             raise KeyError("an atom must be specified")
-
+        # Skip atom influence for latent, go directly to vmo_player
+        
+        
+        if isinstance(influence.feature, LatentSpaceEncoder):
+            if self.vmo_player_enabled.value and self.vmo_player is not None:
+                self.vmo_player.influence(influence, time, **kwargs)
+            return None
 
 
         atom: Atom = self._get_atom(path)

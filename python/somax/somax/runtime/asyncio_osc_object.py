@@ -22,6 +22,7 @@ class AsyncioOscObject(Caller, ABC):
     IP_LOCALHOST = "127.0.0.1"
     DEFAULT_CALLBACK_INTERVAL = 0.001
 
+
     def __init__(self, recv_port: int, send_port: int, ip: str, address: str, debug: bool = settings.DEBUG):
         super().__init__(parse_parenthesis_as_list=False, discard_duplicate_args=False)
         self.logger = logging.getLogger(__name__)
@@ -32,6 +33,9 @@ class AsyncioOscObject(Caller, ABC):
         self.debug: bool = debug
         self.target: Target = SimpleOscTarget(address, send_port, ip)
         self.server: Optional[AsyncIOOSCUDPServer] = None
+        
+        # This dictionary will store partial latent chunks for reassembly
+        self.chunks_received: dict[tuple[str, str], list[Optional[list]]] = {}
 
     @abstractmethod
     async def _main_loop(self):
@@ -49,14 +53,46 @@ class AsyncioOscObject(Caller, ABC):
         transport.close()
 
     def __process_osc(self, _address, *args):
-        args_str: str = MaxFormatter.format_as_string(*args)
-        try:
-            self.call(args_str)
-        except Exception as e:
-            self.logger.error(e)
-            self.logger.debug(repr(e))
-            if self.debug:
-                raise
+        # Debug print
+        #print(f"RAW OSC address={_address}, args[0:6]={args[0:6]}, len={len(args)}")
+        
+        #if args != ('get_time',) and args != ('get_peaks',) :  # Ignore frequent time queries
+            #print("OSC received:", args)
+
+        if len(args) >= 6 and args[0] == "influence" and args[2] == "latent":
+            path = args[1]
+            feature_keyword = args[2]
+            chunk_index = int(args[3])
+            total_chunks = int(args[4])
+            values = args[5:]
+            #print(f"Chunk {chunk_index+1}/{total_chunks}, path={path}, len(values)={len(values)}")
+            key = (path, feature_keyword)
+            if key not in self.chunks_received:
+                self.chunks_received[key] = [None] * total_chunks
+            self.chunks_received[key][chunk_index] = values  # ← this line outside the if above
+            if all(c is not None for c in self.chunks_received[key]):
+                full_vector = []
+                for c in self.chunks_received[key]:
+                    full_vector.extend(c)
+                try:
+                    self.influence(path, feature_keyword, *full_vector)
+                except Exception as e:
+                    self.logger.error(e)
+                    self.logger.debug(repr(e))
+                    if self.debug:
+                        raise
+                del self.chunks_received[key]
+
+        else:
+            # Old messages → pass through unchanged
+            args_str: str = MaxFormatter.format_as_string(*args)
+            try:
+                self.call(args_str)
+            except Exception as e:
+                self.logger.error(e)
+                self.logger.debug(repr(e))
+                if self.debug:
+                    raise
 
     def __unmatched_osc(self, address: str, *_args, **_kwargs) -> None:
         self.logger.info(f"The address '{address}' does not exist.")

@@ -21,6 +21,7 @@ from somax.runtime.influence import FeatureInfluence, AbstractInfluence
 from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.classification.pitch_classifiers import BasePitchClassifier, PitchClassifier
 from somax.classification.omax_mfcc_classifier import OmaxMfccClassifier
+from somax.features.latent_features import LatentSpaceEncoder
 
 from somax.classification.classifier import AbstractClassifier
 
@@ -112,6 +113,8 @@ class InfluenceHandler(Parametric):
         return filtered_candidates
 
     def influence(self,influence: FeatureInfluence):
+
+
 
         if self.vmo_or_label == "label":
             self.influences_label[type(influence.feature)] = self.influence_label(influence)

@@ -76,6 +76,12 @@ class LatentSpaceEncoder(AnalyzableFeature):
         # TODO: Pass rather than hard-code
         wav, sr = sf.read(metadata.filename, dtype="float32")
 
+
+            # mono
+        if wav.ndim == 2:
+            wav = wav.mean(axis=1)
+
+
         segments: List[tuple[torch.Tensor, float]] = cls.segment_wav(
             wav, sr, [event.onset for event in events]
         )
@@ -93,8 +99,11 @@ class LatentSpaceEncoder(AnalyzableFeature):
             )
 
             # Now, convert the audio to the representation.
-            event.set_feature(cls(model(lms.unsqueeze(0))))
-
+            
+            #event.set_feature(cls(model(lms.unsqueeze(0))))
+            #little change here:
+            event.set_feature(cls(model(lms.unsqueeze(0)).detach().cpu().numpy().reshape(-1)))
+            
         return events
 
     @classmethod

@@ -247,8 +247,9 @@ class  VMOManager(Parametric):
         #print( "self.VMOs",self.VMOs)
         for feature in self.features_used.value:
             #print("in get_labels", feature)
-            if self.VMOs[feature] is not None:
-                labels[feature] = self.VMOs[feature].data[index]
+            if feature in self.VMOs.keys():
+                if self.VMOs[feature] is not None:
+                    labels[feature] = self.VMOs[feature].data[index]
         return labels
 
     def get_labels_multi_seg(self, event: CorpusEvent) -> List[int]:

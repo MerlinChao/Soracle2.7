@@ -8,6 +8,7 @@ import time
 import typing
 from importlib import resources
 from typing import Any, Optional, List, Tuple, Type, Union, Dict
+import numpy as np
 
 from somax import settings, log
 from somax.classification.classifier import AbstractClassifier, FeatureClassifier
@@ -52,6 +53,7 @@ from somax.features.chroma_features import OnsetChroma
 from somax.features.energy_features import RMS
 from somax.features.spectral_features import SpectralCentroid
 from somax.features.mfcc_features import Mfcc
+from somax.features.latent_features import LatentSpaceEncoder
 
 
 
@@ -407,32 +409,37 @@ class OscAgent(Agent, AsyncioOscObject):
     ######################################################
 
     def influence(self, path: str, feature_keyword: str, *value) -> None:
-        #print("influence called")
-        #print( "all value",value)
-        #print( "feature_keyword",feature_keyword)
-        #print( "path",path)
         if not self.scheduling_handler.running or self.player.corpus is None:
             return
-
         try:
-            path_and_name: List[str] = self._string_to_path(path)
-
             if feature_keyword == "label":
+                path_and_name: List[str] = self._string_to_path(path)
                 label_type: Optional[Type[AbstractLabel]] = self.player.atoms[path_and_name[0]].label_type()
-
                 if label_type is None:
                     self.logger.error(f"Atom cannot handle label influences")
                     return
-
                 influence: LabelInfluence = LabelInfluence(label_type.parse(value if len(value) > 1 else value[0]))
+                scheduling_time: float = self.scheduling_handler.time
+                self.player.influence(path_and_name, influence, scheduling_time)
+
+            elif feature_keyword == "latent":
+                feature_type = LatentSpaceEncoder
+                influence: FeatureInfluence = FeatureInfluence(feature_type(np.array(value, dtype=np.float32)))
+                scheduling_time: float = self.scheduling_handler.time
+                # Pass empty path or dummy - player.influence will skip atom lookup for latent
+                print("value  influence", influence)
+                print("type of value in influence", type(influence.feature.value()))
+                self.player.influence(["latent"], influence, scheduling_time)
 
             else:
+                path_and_name: List[str] = self._string_to_path(path)
                 feature_type: Type[AbstractFeature] = FeatureDictionary.influence_type_of(feature_keyword)
                 influence: FeatureInfluence = FeatureInfluence(feature_type(value if len(value) > 1 else value[0]))
+                scheduling_time: float = self.scheduling_handler.time
+                self.player.influence(path_and_name, influence, scheduling_time)
 
-            scheduling_time: float = self.scheduling_handler.time
-            self.player.influence(path_and_name, influence, scheduling_time)
             self.send_peaks()
+
 
         except (AssertionError, KeyError, IndexError, ValueError) as e:
             self.logger.error(f"{str(e)}. No influence was processed.")

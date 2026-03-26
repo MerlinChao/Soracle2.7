@@ -9,7 +9,7 @@ from somax.runtime.corpus import Corpus
 from numpy import ndarray
 from typing import Optional
 from somax.features.feature import CorpusFeature
-# from somax.features.latent_features import LatentSpaceEncoder
+from somax.features.latent_features import LatentSpaceEncoder
 from vmo.VMO.oracle import FO, MO, find_threshold, build_oracle
 from typing import Tuple, List, Optional, Dict, Any, Type, Union
 from somax.features.feature import CorpusFeature, AbstractFeature
