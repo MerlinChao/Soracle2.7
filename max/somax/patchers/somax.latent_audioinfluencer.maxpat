@@ -9,7 +9,7 @@
             "modernui": 1
         },
         "classnamespace": "box",
-        "rect": [ 391.0, 99.0, 1000.0, 695.0 ],
+        "rect": [ 693.0, 130.0, 1000.0, 695.0 ],
         "openinpresentation": 1,
         "boxes": [
             {
@@ -2803,7 +2803,7 @@
                 "box": {
                     "comment": "(any/signal/mc.signal) messages or audio input to audio influencer",
                     "id": "obj-194",
-                    "index": 1,
+                    "index": 0,
                     "maxclass": "inlet",
                     "numinlets": 0,
                     "numoutlets": 1,
@@ -2826,7 +2826,7 @@
                 "box": {
                     "comment": "(any) dumpout",
                     "id": "obj-5",
-                    "index": 3,
+                    "index": 0,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -4263,7 +4263,7 @@
                 "box": {
                     "comment": "(list) parameters",
                     "id": "obj-78",
-                    "index": 2,
+                    "index": 0,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -4855,7 +4855,7 @@
                 "box": {
                     "comment": "(list) influences",
                     "id": "obj-24",
-                    "index": 1,
+                    "index": 0,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
@@ -5443,6 +5443,13 @@
             },
             {
                 "patchline": {
+                    "destination": [ "obj-172", 0 ],
+                    "order": 4,
+                    "source": [ "obj-164", 0 ]
+                }
+            },
+            {
+                "patchline": {
                     "destination": [ "obj-184", 0 ],
                     "order": 2,
                     "source": [ "obj-164", 0 ]
@@ -5521,6 +5528,12 @@
                 "patchline": {
                     "destination": [ "obj-178", 0 ],
                     "source": [ "obj-171", 1 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-126", 0 ],
+                    "source": [ "obj-172", 0 ]
                 }
             },
             {
@@ -6533,6 +6546,7 @@
                     "source": [ "obj-99", 0 ]
                 }
             }
-        ]
+        ],
+        "autosave": 0
     }
 }

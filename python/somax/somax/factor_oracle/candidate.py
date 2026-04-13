@@ -10,13 +10,13 @@ from typing import Union, Dict
 #TODO do I really need the labels ? there are already in the event
 class Candidate:
     def __init__(self, starting_index: int, destination_index: int ,event: CorpusEvent, transform: AbstractTransform, 
-                 lrs: Union[int,dict], labels: dict[CorpusFeature,int], segmentation_feature :Optional[CorpusFeature] = None):
+                 lrs: Union[int,dict], labels: dict[CorpusFeature,int], segmentation_feature :Optional[CorpusFeature] = None, score: float = 0):
         self.event = event
         self.transform = transform
         self.starting_index = starting_index
         self.destination_index = destination_index
         self.lrs = lrs # the lrs can be a dict of lrs for each feature # I don't use it for now 
-        self.score = 0
+        self.score = score
         self.labels = labels
         self.segmentation_feature = segmentation_feature
 

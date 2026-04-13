@@ -23,6 +23,8 @@ from somax.runtime.transforms import AbstractTransform
 from somax.scheduler.scheduling_mode import SchedulingMode, RelativeScheduling
 from somax.utils.introspective import StringParsed
 
+import sklearn.metrics.pairwise as pw
+from somax.features.latent_features import LatentSpaceEncoder
 
 class AbstractFilter(Parametric, ContentAware, StringParsed, ABC):
     def __init__(self):
@@ -935,3 +937,35 @@ class LabelFilter(AbstractFilter):
     def _is_eligible_for(self, corpus: Corpus) -> bool:
         name: str = self.label_name.value
         return name is None or corpus.has_label(name)
+
+
+
+
+## Ajout Soracle
+
+# TODO : To be continued. i'm using a filter in influence_handler. but I reelly should be using Abstract Class that already exist.
+class LatentFilter(AbstractFilter):
+    def __init__(self):
+        super().__init__()
+
+
+    def apply(self,
+              peaks: Peaks,
+              latent_vector: np.ndarray,
+              time: float,
+              beat_phase: float,
+              corresponding_events: List[CorpusEvent],
+              corresponding_transforms: List[AbstractTransform],
+              taboo_mask: TabooMask,
+              corpus: Corpus = None,
+              enforce_output: bool = False,
+              **kwargs) -> Tuple[Peaks, TabooMask]:
+        similarity: np.ndarray = np.array([ pw.cosine_similarity([event.features[LatentSpaceEncoder]._value], [latent_vector])[0][0] for event in corresponding_events ], dtype=bool)
+        peaks *= similarity
+        return peaks, taboo_mask
+        
+            
+
+              
+              
+              

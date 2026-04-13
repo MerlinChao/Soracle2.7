@@ -427,8 +427,8 @@ class OscAgent(Agent, AsyncioOscObject):
                 influence: FeatureInfluence = FeatureInfluence(feature_type(np.array(value, dtype=np.float32)))
                 scheduling_time: float = self.scheduling_handler.time
                 # Pass empty path or dummy - player.influence will skip atom lookup for latent
-                print("value  influence", influence)
-                print("type of value in influence", type(influence.feature.value()))
+                #print("value  influence", influence)
+                #print("type of value in influence", type(influence.feature.value()))
                 self.player.influence(["latent"], influence, scheduling_time)
 
             else:

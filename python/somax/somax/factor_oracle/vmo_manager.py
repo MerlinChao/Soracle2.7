@@ -82,10 +82,11 @@ class  VMOManager(Parametric):
                 #print("feature",feature)
                 candidates = self._get_candidates_from_VMO(vmo, window, feature,transpositions)
                 #print("nb of candidates for features" , feature, ":", len(candidates))
-                nb_of_candidates.append((feature,len(candidates)))
+                total_candidates = len(candidates)
                 
                 candidates = self.filter_with_lrs(candidates, lrs_quality)
                 candidates = self.normalize_and_weight(candidates,feature)
+                nb_of_candidates.append((feature,len(candidates), total_candidates))
 
             
             
@@ -120,7 +121,7 @@ class  VMOManager(Parametric):
                         else:
                             all_candidates[starts_destinations[key]].score += candidate.score
         
-        print(nb_of_candidates)
+        print("nb_of_candidates", nb_of_candidates)
         return all_candidates
 
    
@@ -128,7 +129,7 @@ class  VMOManager(Parametric):
         if lrs_quality == 0:
             return candidates
         else:
-            return [candidate for candidate in candidates if candidate.lrs > lrs_quality]
+            return [candidate for candidate in candidates if candidate.lrs >= lrs_quality]
     
     
     # the normalization is maybe not  necessary
@@ -137,19 +138,21 @@ class  VMOManager(Parametric):
     def normalize_and_weight(self, candidates: List[Candidate],feature) -> List[Candidate]:
         scores = np.array([candidate.lrs for candidate in candidates])
         if len(scores) > 0:
-            min_score = np.min(scores)
+            #min_score = np.min(scores)
             max_score = np.max(scores)
-            if max_score > min_score:
-                normalized_scores = (scores - min_score) / (max_score - min_score)
+            if max_score > 0:
+                normalized_scores = (scores / max_score)  # Normalize to [0, 1]
             else:
-                normalized_scores = scores
+                normalized_scores = np.ones_like(0)  
 
             weight = self.weights.value[self.features_used.value.index(feature)] if self.features_used.value.index(feature) < len(self.weights.value) else 0
             weighted_scores = normalized_scores * weight
 
         else:
             return []
+        #print(f"feature {feature} has weight {weight} ")
         for candidate, weighted_score in zip(candidates, weighted_scores):
+            #print(f"candidate with lrs {candidate.lrs} has normalized score {normalized_scores[candidates.index(candidate)]} and weighted score {weighted_score}")
             candidate.score = weighted_score
         return candidates
    

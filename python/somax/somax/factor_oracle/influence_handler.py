@@ -27,6 +27,8 @@ from somax.classification.classifier import AbstractClassifier
 
 from somax.runtime.transforms import NoTransform
 
+import sklearn.metrics.pairwise as pw
+
 #TODO ya vraiment un problem avec featureused, ca devrait pas etre comme ca
 features_used_influence_handler = [YinDiscretePitch, OnsetChroma,  Mfcc]
 
@@ -52,6 +54,11 @@ class InfluenceHandler(Parametric):
         self.influences_label = dict()
         self.vmo_or_label = "label"
         self.match = False
+        
+        self.latent_filter_activated = ParamWithSetter(False, 0, 1, bool, 'latent_filter_activated', self.set_latent_filter_activated)
+        self.latent_weight = ParamWithSetter(0.0, 0, 1, float, 'latent_weight', self.set_latent_weight)
+        self.current_latent = np.zeros((2048,))  # TODO: find a better way to initialize the current latent vector
+
 
         self.dict_nb_external_matches : Dict[CorpusFeature, int] =  {feature: 0 for feature in features_used}
 
@@ -59,10 +66,19 @@ class InfluenceHandler(Parametric):
     def manage_candidates(self, candidates: List[Candidate]) -> List[Candidate]:
         # for now we only need self.isguided == True
         self.isguided.value = True
+        #print('latent_weight', self.latent_weight.value)
+        #print('latent_filter_activated', self.latent_filter_activated.value)
+        filtered_candidates = []
+        
         if self.isguided.value:
-            return self._guided_filter(candidates)
+            filtered_candidates = self._guided_filter(candidates)
         else:
-            return candidates
+            filtered_candidates = candidates
+                
+        if self.latent_filter_activated.value:
+            filtered_candidates = self.latent_additive_filter(filtered_candidates) 
+            
+        return filtered_candidates
 
     # TODO have to take into account the transpositions
     def _guided_filter(self, candidates: List[Candidate]) -> List[Candidate]:
@@ -105,21 +121,71 @@ class InfluenceHandler(Parametric):
                         self.match = True
                         self.dict_nb_external_matches[feature] += 1
             if self.match:
+                
                 candidate.score *= combined_weight
                 
-                # there is a problem here, because if the internal weight are too low, the candidate can't be selected
+                print(" influence_handler: candidate  with lrs", candidate.lrs, "and min_lrs", min_lrs)
+                print(" influence_handler: candidate  with score", candidate.score)
+                print("combined_weight", combined_weight)
                 if candidate.lrs >= min_lrs:
+
                     filtered_candidates.append(candidate)
         return filtered_candidates
 
+
+
+    def latent_filter(self, candidates: List[Candidate]) -> List[Candidate]:
+        
+        if candidates == []:
+            return candidates
+        
+        if self.current_latent is None :
+            return candidates
+        
+        filtered_candidates = []
+        for candidate in candidates:
+            candidate_vector = candidate.event.features[LatentSpaceEncoder]._value
+            similarity = pw.cosine_similarity([candidate_vector], [self.current_latent])[0][0]
+            candidate.score *= similarity**2
+            filtered_candidates.append(candidate)
+        return filtered_candidates
+    
+    #  TODO : I shouldn't recreate a new list of candidates, but just update the score of the existing candidates
+    def latent_additive_filter(self, candidates: List[Candidate]) -> List[Candidate]:
+        if self.current_latent is None:
+            return candidates
+        
+        if len(candidates) <= 1: # if there is  1 or 0 candidates, we don't need to filter
+            return candidates
+        
+        
+        filtered_candidates = []
+        latent_score = [ pw.cosine_similarity([candidate.event.features[LatentSpaceEncoder]._value], [self.current_latent])[0][0] for candidate in candidates]
+        min, max = np.min(latent_score), np.max(latent_score)
+        latent_score = [score  / max  if max > 0 else 0 for score in latent_score]  # Normalize to [0, 1]
+        # we also normalize candidate score to be sure that the latent score have an impact even if the internal score are low
+        min_candidate_score, max_candidate_score = np.min([candidate.score for candidate in candidates]), np.max([candidate.score for candidate in candidates])
+
+        for candidate in candidates:
+            print("latent_score", latent_score[candidates.index(candidate)])
+            candidate.score = candidate.score / max_candidate_score if max_candidate_score > 0 else 0
+            candidate.score  = (1 - self.latent_weight.value) * candidate.score + self.latent_weight.value * latent_score[candidates.index(candidate)]
+            filtered_candidates.append(candidate)
+        return filtered_candidates
+
+
     def influence(self,influence: FeatureInfluence):
 
+        if isinstance(influence.feature, LatentSpaceEncoder):
+            #print("new latent incoming")
+            self.current_latent = influence.feature._value
 
 
         if self.vmo_or_label == "label":
             self.influences_label[type(influence.feature)] = self.influence_label(influence)
         else:
             #print("aa influence.feature",influence.feature)
+            
             self.influences_label[type(influence.feature)] = self.VMO_classifier.label_from_feature(type(influence.feature), influence.feature.value())
 
     def influence_label(self, influence: AbstractInfluence, **kwargs) -> int:
@@ -130,7 +196,7 @@ class InfluenceHandler(Parametric):
             elif isinstance(influence.feature, RuntimeIntegerPitch):
                 return self.pitchclassifier.classify_influence(influence)[0][0].label   
             elif isinstance(influence.feature, Mfcc):
-                return self.mfccclassifier.classify_influence(influence)[0][0].label       
+                return self.mfccclassifier.classify_influence(influence)[0][0].label
 
 
     '''
@@ -144,7 +210,7 @@ class InfluenceHandler(Parametric):
     def update_after_jump(self, selected_candidate):
         self.influences_label = dict()
         self.dict_nb_external_matches = {feature: 0 for feature in self.features_used.value}
-
+        #self.current_latent = None # TODO for now i don't reset the latent vector after each jump
 
     def update_after_step(self, selected_candidate):
         pass
@@ -197,4 +263,10 @@ class InfluenceHandler(Parametric):
             return feature_mapping[string_feature]
         except KeyError:
             raise ValueError(f"Unrecognized feature type: {string_feature}")
-        
+            
+
+    def set_latent_filter_activated(self, latent_filter_activated: bool):
+            self.latent_filter_activated.value = latent_filter_activated
+
+    def set_latent_weight(self, latent_weight: float):
+            self.latent_weight.value = latent_weight

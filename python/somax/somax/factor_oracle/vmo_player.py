@@ -164,15 +164,16 @@ class VMO_Player(Parametric):
         self.last_onset_time = 0.0
         self.current_delta_time = 0.0
         
-        self.current_latent = np.zeros((2048,))  # TODO: find a better way to initialize the current latent vector
 
         self.set_corpus(
             corpus
         )  # maybe this shouldn't be here but otherwise the Vmos are not created correctly
 
+        self.only_latent = ParamWithSetter(
+            False, 0, None, bool, "only latent", self.set_only_latent
+        ) 
     
-    
-    def latent_candidate(self):
+    def latent_best_candidate(self):
         max_similarity = -100000
         candidat = None
         for slice in self.corpus.events:
@@ -185,31 +186,63 @@ class VMO_Player(Parametric):
             # print("current_latent shape", self.current_latent.shape)
             # print("cosine_similarity", pw.cosine_similarity([embeding], [self.current_latent]))
             
-            similarity = pw.cosine_similarity([embeding], [self.current_latent])[0][0]
+            similarity = pw.cosine_similarity([embeding], [self.influence_handler.current_latent])[0][0]
             if similarity > max_similarity :
                 max_similarity = similarity
                 #TODO check for slice.state_index if the +1 is correct
                 candidat = Candidate( self.navigator.position_event, slice.state_index + 1, slice,NoTransform(),
                                      lrs=  0, labels = None, segmentation_feature = self.navigator.segmentation_feature)
         #print("max_similarity", max_similarity)
-        return candidat   
+        return candidat  
     
     
-    def new_event(self):
+    def latent_candidate_with_temperature(self):
+        candidates = []
+        for slice in self.corpus.events:
+            #print("slice state index", slice.state_index)
+            #slice : CorpusEvent
+            embeding = slice.features[LatentSpaceEncoder]._value
+            # print("embeding", embeding)
+            # print("embeding shape", embeding.shape)
+            # print("current_latent ", self.current_latent)
+            # print("current_latent shape", self.current_latent.shape)
+            # print("cosine_similarity", pw.cosine_similarity([embeding], [self.current_latent]))
+            
+            similarity = pw.cosine_similarity([embeding], [self.influence_handler.current_latent])[0][0]
+            candidat = Candidate( self.navigator.position_event, slice.state_index + 1, slice,NoTransform(),
+                                     lrs=  0, score= similarity, labels = None, segmentation_feature = self.navigator.segmentation_feature)
+            candidates.append(candidat)
+        candidat = self.candidate_selector.select_candidate(candidates)
+        return candidat
+        
+    
+    #not used for now
+    def new_event_only_latent(self):
         #print("new event")
-        if self.current_latent is None:
+        if self.influence_handler.current_latent is None:
             next_step : Candidate = self.navigator.next_step()
             event = next_step.event
             print("no latent, next step event", event.state_index)
             self.update_after_step(next_step)
             return event, NoTransform(), True
         else:
-            candidat = self.latent_candidate()
+            candidat = self.latent_candidate_with_temperature()
             event = candidat.event
             print("new jump", event.state_index)
             self.update_after_step(candidat)
-            self.current_latent = None
+            self.influence_handler.current_latent = None
             return event, NoTransform(), True
+    
+    
+    
+    
+    def new_event(self):
+
+        if self.only_latent.value:
+            return self.new_event_only_latent()
+
+
+
 
         # print("corpus in vmo_player",self.corpus)
         if self.next_jump is None:
@@ -220,7 +253,7 @@ class VMO_Player(Parametric):
             self.next_jump = self.get_next_jump()
 
         print("vmo_player position_event", self.navigator.position_event)
-        print("vmo_player next_jump", self.next_jump.starting_index)
+        #print("vmo_player next_jump", self.next_jump.starting_index)
 
         if self.navigator.position_event == self.next_jump.starting_index:
             print("vmo_player jump to ", self.next_jump.destination_index)
@@ -230,11 +263,11 @@ class VMO_Player(Parametric):
         else:
 
             next_step: Candidate = self.navigator.next_step()
-            print(
-                "vmo_player next step to ",
-                next_step.destination_index,
-                next_step.segmentation_feature,
-            )
+            #print(
+            #    "vmo_player next step to ",
+            #    next_step.destination_index,
+            #    next_step.segmentation_feature,
+            #)
             event, transform = next_step.event, next_step.transform
             self.update_after_step(next_step)
 
@@ -245,7 +278,7 @@ class VMO_Player(Parametric):
         candidates = self.navigator.get_candidates()
 
         filtered_candidates = self.influence_handler.manage_candidates(candidates)
-
+        
         print("nb_filtered", len(candidates), len(filtered_candidates))
 
         if filtered_candidates == []:
@@ -264,6 +297,7 @@ class VMO_Player(Parametric):
                 selected_candidate.starting_index,
                 selected_candidate.destination_index,
                 selected_candidate.score,
+                selected_candidate.lrs,
                 selected_candidate.transform,
             ),
         )
@@ -289,10 +323,10 @@ class VMO_Player(Parametric):
         self.influence_handler.influence(influence)
         
         if isinstance(influence.feature, LatentSpaceEncoder):
-            self.current_latent = influence.feature._value
+            self.influence_handler.current_latent = influence.feature._value
             #print("new latent incoming")
-            #print(type(self.current_latent))
-            #print(self.current_latent.shape)
+            #print(type(self.influence_handler.current_latent))
+            #print(self.influence_handlers.current_latent.shape)
         
         self.get_delta_time(time)
         # self.influence_fo.influence(influence, time, self.current_event)
@@ -501,3 +535,6 @@ class VMO_Player(Parametric):
 
     def set_auto_oracle_creation(self, value: bool):
         self.auto_oracle_creation.value = value
+        
+    def set_only_latent(self, value: bool):
+        self.only_latent.value = value
