@@ -6,4 +6,4 @@ from .pitch_features import (BaseIntegerPitch, RuntimeIntegerPitch, TopNote, Vir
 from .spectral_features import OctaveBands, SpectralCentroid
 from .temporal_features import Tempo, BeatPhase
 from .mfcc_features import Mfcc, RuntimeMfcc
-from .speed_features import TempogramCoeffOnset, TempogramCoeffMean
+from .speed_features import TempogramCoeffOnset, TempogramCoeffMean, TempogramCoeff

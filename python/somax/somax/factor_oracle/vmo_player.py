@@ -37,7 +37,7 @@ from somax.features.pitch_features import YinDiscretePitch, TopNote, RuntimeInte
 from somax.features.chroma_features import OnsetChroma
 from somax.features.mfcc_features import Mfcc
 from somax.features.energy_features import TotalEnergyDb, RMS
-from somax.features.speed_features import TempogramCoeffOnset
+from somax.features.speed_features import TempogramCoeffOnset, TempogramCoeff
 from somax.features.spectral_features import SpectralCentroid
 from somax.runtime.influence import FeatureInfluence
 from somax.runtime.corpus import Corpus
@@ -163,7 +163,7 @@ class VMO_Player(Parametric):
 
         self.last_onset_time = 0.0
         self.current_delta_time = 0.0
-        self.current_speed = 0
+        self.current_speed = 0.0
         self.last_speeds = []
 
         self.set_corpus(
@@ -222,8 +222,8 @@ class VMO_Player(Parametric):
 
             for candidate in filtered_candidates:
                 #get a new weight distibution for candidates based on the tempogram coeff feature
-                if TempogramCoeffOnset in candidate.labels.keys():
-                    tempogram_coeff = candidate.labels[TempogramCoeffOnset].value
+                if TempogramCoeff in candidate.labels.keys():
+                    tempogram_coeff = candidate.labels[TempogramCoeff].value
                     #print("tempogram_coeff", tempogram_coeff)
                     # we can use the tempogram coeff to adjust the score of the candidate, for example by multiplying it with the score
                     candidate.score *= tempogram_coeff
@@ -275,10 +275,12 @@ class VMO_Player(Parametric):
 
     def get_current_speed(self, time):
         delta_time = self.get_delta_time(time)
+        print(delta_time)
         self.last_speeds.append(delta_time)
         if len(self.last_speeds) > 5:
             self.last_speeds.pop(0)
         self.current_speed = np.mean(self.last_speeds)
+        print('current_speed', self.current_speed)
 
 
     # pour memory + vmo
