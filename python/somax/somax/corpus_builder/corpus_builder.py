@@ -32,7 +32,7 @@ from somax.scheduler.scheduling_mode import AbsoluteScheduling, RelativeScheduli
 
 from somax.features.spectral_features import SpectralCentroid
 # experimental features
-from somax.features.speed_features import TempogramCoeffOnset, TempogramCoeffMean
+from somax.features.speed_features import TempogramCoeff
 from somax.features.latent_features import LatentSpaceEncoder
 
 
@@ -368,8 +368,8 @@ class CorpusBuilder:
         
 
 
-        experimental_features = [TempogramCoeffOnset, TempogramCoeffMean, LatentSpaceEncoder]
-        #experimental_features = [TempogramCoeffOnset, TempogramCoeffMean]
+        #experimental_features =  [  LatentSpaceEncoder]
+        experimental_features = []
         for feature in experimental_features:
             try:
                 print("analyzing experimental feature", feature)

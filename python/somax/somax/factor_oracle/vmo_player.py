@@ -48,6 +48,9 @@ from somax.runtime.region_mask import RegionMask
 from vmo.VMO.oracle import find_threshold, build_oracle, FO, MO
 from vmo.analysis.analysis import create_selfsim
 
+from somax.byol_a_latent_space_encoder.utils_visualisation import LatentSpaceVisualizer
+
+
 # from pyoracle.pyoracle import make_oracle, make_features, calculate_ideal_threshold
 
 import sklearn.preprocessing as pre
@@ -156,6 +159,9 @@ class VMO_Player(Parametric):
         )  # i don't use the vmo_classifier for now
         self.candidate_selector = CandidateSelector(temperature)
         self.vmo_visualizer = VMOVisualizer(corpus, self.vmo_creator.VMOs)
+        
+        
+        self.latent_visualizer = LatentSpaceVisualizer(corpus)
 
         self.next_jump = None
         self.is_matched = False
@@ -172,6 +178,9 @@ class VMO_Player(Parametric):
         self.only_latent = ParamWithSetter(
             False, 0, None, bool, "only latent", self.set_only_latent
         ) 
+        
+        
+        
     
     def latent_best_candidate(self):
         max_similarity = -100000
@@ -320,7 +329,7 @@ class VMO_Player(Parametric):
 
     def influence(self, influence: FeatureInfluence, time, *args, **kwargs):
         #print("all args in influence vmo player",influence,influence.feature,influence.feature._value, time, args, kwargs)
-        self.influence_handler.influence(influence)
+        self.influence_handler.influence(influence, time)
         
         if isinstance(influence.feature, LatentSpaceEncoder):
             self.influence_handler.current_latent = influence.feature._value
@@ -328,7 +337,6 @@ class VMO_Player(Parametric):
             #print(type(self.influence_handler.current_latent))
             #print(self.influence_handlers.current_latent.shape)
         
-        self.get_delta_time(time)
         # self.influence_fo.influence(influence, time, self.current_event)
         
         #TODO rethink that
@@ -337,11 +345,6 @@ class VMO_Player(Parametric):
             
             # self.update_when_need_new_jump()
 
-    def get_delta_time(self, time):
-        current_delta_time = time - self.last_onset_time
-        self.last_onset_time = time
-        self.current_delta_time = current_delta_time
-        return current_delta_time
 
     # pour memory + vmo
     def get_peaks(self, atom_name: str) -> Peaks:
@@ -502,6 +505,8 @@ class VMO_Player(Parametric):
         # self.navigator.set_vmo_manager(self.vmo_manager)
         self.vmo_visualizer.set_corpus(corpus)
         # self.vmo_visualizer.set_vmos(self.vmo_creator.VMOs)
+
+        self.latent_visualizer = LatentSpaceVisualizer(corpus)
 
         if self.auto_oracle_creation.value:
             self.create_vmos()

@@ -22,6 +22,8 @@ from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.classification.pitch_classifiers import BasePitchClassifier, PitchClassifier
 from somax.classification.omax_mfcc_classifier import OmaxMfccClassifier
 from somax.features.latent_features import LatentSpaceEncoder
+from somax.features.speed_features import TempogramCoeff
+
 
 from somax.classification.classifier import AbstractClassifier
 
@@ -58,7 +60,15 @@ class InfluenceHandler(Parametric):
         self.latent_filter_activated = ParamWithSetter(False, 0, 1, bool, 'latent_filter_activated', self.set_latent_filter_activated)
         self.latent_weight = ParamWithSetter(0.0, 0, 1, float, 'latent_weight', self.set_latent_weight)
         self.current_latent = np.zeros((2048,))  # TODO: find a better way to initialize the current latent vector
-
+        
+        self.current_speed = 0.0
+        self.last_onset_time = 0.0
+        self.current_delta_time = 0.0
+        self.last_speeds = []
+        self.speed_filter_activated = ParamWithSetter(False, 0, 1, bool, 'speed_filter_activated', self.set_speed_filter_activated)
+        self.borne_inf= ParamWithSetter(0.1, 0, None, float, 'borne_inf', self.set_borne_inf)
+        self.borne_sup= ParamWithSetter(1.0, 0, None, float, 'borne_sup', self.set_borne_sup)
+        self.mode_de_jeu= ParamWithSetter("contre", 0, None, str, 'mode_de_jeu', self.set_mode_de_jeu)
 
         self.dict_nb_external_matches : Dict[CorpusFeature, int] =  {feature: 0 for feature in features_used}
 
@@ -77,7 +87,15 @@ class InfluenceHandler(Parametric):
                 
         if self.latent_filter_activated.value:
             filtered_candidates = self.latent_additive_filter(filtered_candidates) 
-            
+    
+        print("speed_filter_activated", self.speed_filter_activated.value)
+        if self.speed_filter_activated.value:
+            print("current_speed", self.current_speed)
+            print("borne_inf", self.borne_inf.value)
+            print("borne_sup", self.borne_sup.value)
+            print("mode_de_jeu", self.mode_de_jeu.value)
+            filtered_candidates = self.speed_filter(filtered_candidates, self.last_onset_time, self.borne_inf.value, self.borne_sup.value, self.mode_de_jeu.value)          
+        
         return filtered_candidates
 
     # TODO have to take into account the transpositions
@@ -124,15 +142,50 @@ class InfluenceHandler(Parametric):
                 
                 candidate.score *= combined_weight
                 
-                print(" influence_handler: candidate  with lrs", candidate.lrs, "and min_lrs", min_lrs)
-                print(" influence_handler: candidate  with score", candidate.score)
-                print("combined_weight", combined_weight)
+                #print(" influence_handler: candidate  with lrs", candidate.lrs, "and min_lrs", min_lrs)
+                #print(" influence_handler: candidate  with score", candidate.score)
+                #print("combined_weight", combined_weight)
                 if candidate.lrs >= min_lrs:
 
                     filtered_candidates.append(candidate)
         return filtered_candidates
 
+    def _compute_speed_coeff(self, speed: float, borne_inf: float, borne_sup: float) -> float:
+        if speed < borne_inf:
+            return 1
+        elif speed > borne_sup:
+            return 0
+        else:
+            return 1 - speed / borne_sup
 
+    def speed_filter(
+        self,
+        candidates: List[Candidate],
+        time: float,
+        borne_inf: float,
+        borne_sup: float,
+        mode_de_jeu: str = "contre",
+    ) -> List[Candidate]:
+        if not candidates:
+            return candidates
+
+        self.current_speed = self.get_current_speed(time)
+        coeff = self._compute_speed_coeff(self.current_speed, borne_inf, borne_sup)
+
+        for candidate in candidates:
+            speed_feature = candidate.event.features.get(TempogramCoeff).value()
+            diff = abs(speed_feature - coeff)
+
+            if mode_de_jeu == "contre":
+                correlation = diff
+            elif mode_de_jeu == "avec":
+                correlation = 1 - diff
+            else:
+                raise ValueError(f"Invalid mode_de_jeu: {mode_de_jeu}")
+
+            candidate.score *= correlation
+
+        return candidates
 
     def latent_filter(self, candidates: List[Candidate]) -> List[Candidate]:
         
@@ -167,15 +220,17 @@ class InfluenceHandler(Parametric):
         min_candidate_score, max_candidate_score = np.min([candidate.score for candidate in candidates]), np.max([candidate.score for candidate in candidates])
 
         for candidate in candidates:
-            print("latent_score", latent_score[candidates.index(candidate)])
+            #print("latent_score", latent_score[candidates.index(candidate)])
             candidate.score = candidate.score / max_candidate_score if max_candidate_score > 0 else 0
             candidate.score  = (1 - self.latent_weight.value) * candidate.score + self.latent_weight.value * latent_score[candidates.index(candidate)]
             filtered_candidates.append(candidate)
         return filtered_candidates
 
 
-    def influence(self,influence: FeatureInfluence):
+    def influence(self,influence: FeatureInfluence,time):
 
+        self.current_speed = self.get_current_speed(time)
+        
         if isinstance(influence.feature, LatentSpaceEncoder):
             #print("new latent incoming")
             self.current_latent = influence.feature._value
@@ -270,3 +325,29 @@ class InfluenceHandler(Parametric):
 
     def set_latent_weight(self, latent_weight: float):
             self.latent_weight.value = latent_weight
+
+
+
+    def get_current_speed(self, time):
+        delta_time = self.get_delta_time(time)
+        #print(delta_time)
+        self.last_speeds.append(delta_time)
+        if len(self.last_speeds) > 5:
+            self.last_speeds.pop(0)
+        return np.mean(self.last_speeds)
+        
+    def get_delta_time(self, time):
+        current_delta_time = time - self.last_onset_time
+        self.last_onset_time = time
+        self.current_delta_time = current_delta_time
+        return current_delta_time
+
+    def set_speed_filter_activated(self, speed_filter_activated: bool):
+            self.speed_filter_activated.value = speed_filter_activated
+    
+    def set_borne_inf(self, borne_inf: float):
+            self.borne_inf.value = borne_inf
+    def set_borne_sup(self, borne_sup: float):
+            self.borne_sup.value = borne_sup
+    def set_mode_de_jeu(self, mode_de_jeu: str):
+            self.mode_de_jeu.value = mode_de_jeu
