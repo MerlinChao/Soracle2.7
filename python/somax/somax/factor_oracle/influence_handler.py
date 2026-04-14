@@ -17,6 +17,7 @@ from somax.features.energy_features import RMS
 from somax.features.pitch_features import YinDiscretePitch, RuntimeIntegerPitch
 from somax.features.spectral_features import SpectralCentroid
 from somax.features.mfcc_features import Mfcc
+from somax.features.latent_features import LatentSpaceEncoder
 from somax.runtime.influence import FeatureInfluence, AbstractInfluence
 from somax.classification.chroma_classifiers import SomChromaClassifier
 from somax.classification.pitch_classifiers import BasePitchClassifier, PitchClassifier
@@ -128,6 +129,8 @@ class InfluenceHandler(Parametric):
                 return self.pitchclassifier.classify_influence(influence)[0][0].label   
             elif isinstance(influence.feature, Mfcc):
                 return self.mfccclassifier.classify_influence(influence)[0][0].label       
+            elif isinstance(influence.feature, LatentSpaceEncoder):
+                return self.
 
 
     '''
